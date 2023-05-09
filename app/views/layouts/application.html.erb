@@ -11,12 +11,20 @@
 
   <body>
     <header>
-      <% if user_signed_in? %>
-          <%= current_user.description %>
-          <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
-        <% else %>
-          <%= link_to 'Entrar', new_user_session_path %>
+      <nav>
+        <%= link_to root_path do %>
+          <h1>Leilões de Estoque</h1>
         <% end %>
+        <% if user_signed_in? %>
+            <%= current_user.description %>
+            <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+            <% if current_user.admin? == true %>
+              <%= button_to 'Painel Admin' %>
+            <% end %>
+          <% else %>
+            <%= link_to 'Entrar', new_user_session_path %>
+        <% end %>
+      </nav>
     </header>
     <main>
       <div>

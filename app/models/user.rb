@@ -8,7 +8,13 @@ class User < ApplicationRecord
 
   validates :name, :email, :password, :cpf, presence: true
 
+  before_validation :make_admin_if_email, on: :create
+
   def description
     "#{name} | #{email}"
+  end
+
+  def make_admin_if_email
+    self.role = :admin if email.split('@').last == 'leilaodogalpao.com.br'
   end
 end
