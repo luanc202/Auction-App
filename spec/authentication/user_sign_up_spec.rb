@@ -9,7 +9,7 @@ describe 'Usuário se registra' do
       fill_in 'Nome', with: 'Márcio'
       fill_in 'E-mail', with: 'pessoa@email.com'
       fill_in 'Senha', with: 'password'
-      fill_in 'CPF', with: '48631016004'
+      fill_in 'CPF', with: '04206205086'
       fill_in 'Confirme sua senha', with: 'password'
       click_on 'Criar conta'
 
@@ -30,7 +30,7 @@ describe 'Usuário se registra' do
       fill_in 'E-mail', with: 'marcio@leilaodogalpao.com.br'
       fill_in 'Senha', with: 'password'
       fill_in 'Confirme sua senha', with: 'password'
-      fill_in 'CPF', with: '48631016004'
+      fill_in 'CPF', with: '04206205086'
       click_on 'Criar conta'
 
       expect(page).to have_content('Bem vindo! Você realizou seu registro com sucesso.')

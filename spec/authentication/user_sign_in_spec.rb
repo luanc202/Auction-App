@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Usuário se autentica' do
   context 'com sucesso' do
     it 'como usuário' do
-      User.create!(email: 'paulo@email.com', password: '171653', name: 'Paulo', cpf: 72653856394)
+      User.create!(email: 'paulo@email.com', password: '171653', name: 'Paulo', cpf: '04206205086')
   
       visit root_path
       within 'nav' do
@@ -24,7 +24,7 @@ describe 'Usuário se autentica' do
     end
 
     it 'como administrador' do
-      User.create!(email: 'paulo@leilaodogalpao.com.br', password: '171653', name: 'Paulo', cpf: 72653856394)
+      User.create!(email: 'paulo@leilaodogalpao.com.br', password: '171653', name: 'Paulo', cpf: '04206205086')
   
       visit root_path
       within 'nav' do
@@ -47,7 +47,7 @@ describe 'Usuário se autentica' do
   end
 
   it 'e faz logout' do
-    User.create!(email: 'paulo@email.com', password: '171653', name: 'Paulo', cpf: 72653856394)
+    User.create!(email: 'paulo@email.com', password: '171653', name: 'Paulo', cpf: '04206205086')
 
     visit root_path
     within 'nav' do
