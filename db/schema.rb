@@ -40,7 +40,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_10_150017) do
   end
 
   create_table "auction_item_categories", force: :cascade do |t|
-    t.string "category"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -18,8 +18,9 @@
         <% if user_signed_in? %>
             <%= current_user.description %>
             <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
-            <% if current_user.admin? == true %>
+            <% if current_user.admin? %>
               <%= button_to 'Painel Admin' %>
+              <%= link_to 'Itens para Leilão', auction_items_path %>
             <% end %>
           <% else %>
             <%= link_to 'Entrar', new_user_session_path %>

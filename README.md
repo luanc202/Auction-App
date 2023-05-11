@@ -5,9 +5,10 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version: 3.2.1
 
-* System dependencies
+* System dependencies: 
+  - libvips 8.14.2-1
 
 * Configuration
 

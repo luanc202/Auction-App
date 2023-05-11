@@ -1,0 +1,20 @@
+pt-BR:
+  activerecord:
+    models:
+      auction_item: 'Item de Leilão'
+      auction_item_category: 'Categoria'
+    attributes:
+      auction_item:
+        name: 'Nome'
+        weight: 'Peso'
+        height: 'Altura'
+        width: 'Largura'
+        length: 'Comprimento'
+        depth: 'Profundidade'
+        code: 'Código'
+        description: 'Descrição'
+        supplier_id: 'Fornecedor'
+        auction_item_category_id: 'Categoria'
+        image: 'Foto'
+      auction_item_category:
+        name: 'Categoria'

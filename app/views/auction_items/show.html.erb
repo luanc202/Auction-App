@@ -1,0 +1,23 @@
+<h1><%= @auction_item.name %></h1>
+<div id="auction-item-details">
+  <dl>
+    <dt>Item:</dt>
+    <dd><%= @auction_item.name %></dd>
+    <dt><%= AuctionItem.human_attribute_name(:image) %>:</dt>
+    <dd><%= image_tag @auction_item.image %></dd>
+    <dt><%= AuctionItemCategory.human_attribute_name(:name) %>:</dt>
+    <dd><%= @auction_item.auction_item_category.name %></dd>
+    <dt><%= AuctionItem.human_attribute_name(:description) %>:</dt>
+    <dd><%= @auction_item.description %></dd>
+    <dt>Dimensões:</dt>
+    <dd><%= @auction_item.width %>cm x <%= @auction_item.height %>cm x <%= @auction_item.depth %>cm</dd>
+    <dt><%= AuctionItem.human_attribute_name(:weight) %>:</dt>
+    <dd><%= @auction_item.weight %>g</dd>
+    <dt><%= AuctionItem.human_attribute_name(:code) %>:</dt>
+    <dd><%= @auction_item.code %></dd>
+  </dl>
+</div>
+
+<div>
+  <%= link_to('Voltar', auction_items_path) %>
+</div>

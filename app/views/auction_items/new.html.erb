@@ -1,0 +1,37 @@
+<h1>Cadastrar novo Item de Leilão</h1>
+
+<%= form_with(model: @auction_item) do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+  <div>
+    <%= f.label :weight %>
+    <%= f.text_field :weight %>
+  </div>
+  <div>
+    <%= f.label :width %>
+    <%= f.text_field :width %>
+  </div>
+  <div>
+    <%= f.label :height %>
+    <%= f.text_field :height %>
+  </div>
+  <div>
+    <%= f.label :depth %>
+    <%= f.text_field :depth %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div>
+    <%= f.label :auction_item_category_id %>
+    <%= f.collection_select :auction_item_category_id, @auction_item_categories.order(:name), :id, :name%>
+  </div>
+  <%= f.submit %>
+<% end %>

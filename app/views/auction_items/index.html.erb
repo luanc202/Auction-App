@@ -1,0 +1,30 @@
+<h1>Itens para Leilão</h1>
+
+<%= link_to 'Cadastrar Novo', new_auction_item_path %>
+
+<section>
+    <% @auction_items.each do |ai| %>
+  <div>
+      <h3><%= link_to ai.name, ai %></h3>
+      <div>
+        <%= image_tag ai.image, id: 'auction-item-image' %>
+      </div>
+      <dl>
+        <dt>Descrição:</dt>
+        <dd><%= ai.description %></dd>
+        <dt>Peso:</dt>
+        <dd><%= ai.weight %>g</dd>
+        <dt>Dimensões:</dt>
+        <dd><%= ai.width %>cm x <%= ai.height %>cm x <%= ai.depth %>cm</dd>
+        <dt>Categoria:</dt>
+        <dd><%= ai.auction_item_category.name %></dd>
+        <dt>Código:</dt>
+        <dd><%= ai.code %></dd>
+      </dl>
+    <% end %>
+  </div>
+
+  <% if @auction_items.empty? %>
+    <h2>Nenhum Item de Leilão cadastrado.</h2>
+  <% end %>
+</section>
