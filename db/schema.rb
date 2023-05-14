@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_10_150017) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_14_012000) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_10_150017) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "auction_batches", force: :cascade do |t|
+    t.string "code"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer "minimum_bid_amount"
+    t.integer "minimum_bid_difference"
+    t.integer "status"
+    t.integer "approved_by_user_id"
+    t.integer "created_by_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "auction_item_categories", force: :cascade do |t|
