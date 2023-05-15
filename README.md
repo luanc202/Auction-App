@@ -8,7 +8,8 @@ Things you may want to cover:
 * Ruby version: 3.2.1
 
 * System dependencies: 
-  - libvips 8.14.2-1
+  - libvips 
+  - openslide 
 
 * Configuration
 
