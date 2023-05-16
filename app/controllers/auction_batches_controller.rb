@@ -1,10 +1,10 @@
 class AuctionBatchesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[index show]
   before_action :allow_if_admin, except: %i[index show]
   before_action :set_auction_batch, only: %i[show edit update approved add_item add_item_save]
 
   def index
-    @auction_batches = if current_user.admin?
+    @auction_batches = if current_user && current_user.admin?
                          AuctionBatch.all
                        else
                          AuctionBatch.where(status: :approved)

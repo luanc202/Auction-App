@@ -3,25 +3,29 @@
 <%= link_to 'Cadastrar Novo Lote', new_auction_batch_path %>
 
 <section>
-    <% @auction_batches.each do |ab| %>
   <div>
-      <h3><%= link_to "Lote: #{ab.code}", ab %></h3>
-      <dl>
-        <dt>Quantidade de itens:</dt>
-        <dd><%= ab.auction_items.count %></dd>
-        <dt><%= AuctionBatch.human_attribute_name(:start_date) %>:</dt>
-        <dd><%= I18n.l(ab.start_date, format: :short)%></dd>
-        <dt><%= AuctionBatch.human_attribute_name(:end_date) %>:</dt>
-        <dd><%= I18n.l(ab.end_date, format: :short)%></dd>
-        <dt><%= AuctionBatch.human_attribute_name(:created_by_user) %>:</dt>
-        <dd><%= ab.created_by_user.name %></dd>
-        <dt><%= AuctionBatch.human_attribute_name(:status) %>:</dt>
-        <dd><%= I18n.t(ab.status) %></dd>
-      </dl>
+  <h2>Lotes em andamento</h2>
+    <% @auction_batches.select{ |ab| ab.start_date < DateTime.now }.each do |auction_batch| %>
+    <div>
+      <%= render auction_batch %>
+    </div>
+    <% end %>
+
+    <% if @auction_batches.select{ |ab| ab.start_date < DateTime.now }.empty? %>
+    <h4>Nenhum Lote em andamento.</h4>
     <% end %>
   </div>
 
-  <% if @auction_batches.empty? %>
-    <h2>Nenhum Lote para Leilão cadastrado.</h2>
-  <% end %>
+  <div>
+    <h2>Lotes futuros</h2>
+    <% @auction_batches.select{ |ab| ab.start_date > DateTime.now }.each do |auction_batch| %>
+    <div>
+      <%= render auction_batch %>
+    </div>
+    <% end %>
+
+    <% if @auction_batches.empty? %>
+    <h4>Nenhum Lote futuro.</h4>
+    <% end %>
+  </div>
 </section>

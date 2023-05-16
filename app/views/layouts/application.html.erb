@@ -15,13 +15,13 @@
         <%= link_to root_path do %>
           <h1>Leilões de Estoque</h1>
         <% end %>
+        <%= link_to 'Lotes para Leilão', auction_batches_path %>
         <% if user_signed_in? %>
             <%= current_user.description %>
             <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
             <% if current_user.admin? %>
               <%= button_to 'Painel Admin' %>
               <%= link_to 'Itens para Leilão', auction_items_path %>
-              <%= link_to 'Lotes para Leilão', auction_batches_path %>
             <% end %>
           <% else %>
             <%= link_to 'Entrar', new_user_session_path %>
