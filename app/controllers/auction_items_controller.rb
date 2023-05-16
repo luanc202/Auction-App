@@ -1,12 +1,8 @@
 class AuctionItemsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :check_if_admin
 
   def index
-    if !current_user.admin?
-      redirect_to root_path, notice: 'Acesso não autorizado.'
-    else
       @auction_items = AuctionItem.all
-    end
   end
 
   def new
@@ -29,5 +25,11 @@ class AuctionItemsController < ApplicationController
 
   def show
     @auction_item = AuctionItem.find(params[:id])
+  end
+
+  private
+
+  def check_if_admin
+    redirect_to root_path, notice: 'Acesso não autorizado.' unless current_user.admin?
   end
 end

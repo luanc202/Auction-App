@@ -5,7 +5,7 @@ class AuctionBatch < ApplicationRecord
 
   enum status: { pending: 0, approved: 1, finished: 2 }
 
-  validates :code, :start_date, :end_date, :minimum_bid_amount, :minimum_bid_difference, :created_by_user_id,
+  validates :code, :start_date, :end_date, :minimum_bid_amount, :minimum_bid_difference,
             presence: true
   validates :code, uniqueness: true
   validates :code,

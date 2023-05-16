@@ -3,6 +3,7 @@ pt-BR:
     models:
       auction_item: 'Item de Leilão'
       auction_item_category: 'Categoria'
+      auction_batch: 'Lote para Leilão'
     attributes:
       auction_item:
         name: 'Nome'
@@ -18,3 +19,9 @@ pt-BR:
         image: 'Foto'
       auction_item_category:
         name: 'Categoria'
+      auction_batch:
+        code: 'Código'
+        start_date: 'Data de início'
+        end_date: 'Data de término'
+        minimum_bid_amount: 'Lance inicial'
+        minimum_bid_difference: 'Menor diferença entre lances'

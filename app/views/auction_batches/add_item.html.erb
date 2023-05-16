@@ -1,0 +1,13 @@
+<h2>Adicionar item ao Lote para Leilão</h2>
+
+<section>
+  <div>
+    <%= form_with do |f| %>
+    <div>
+      <%= f.label :auction_item_id, 'Item' %>
+      <%= f.collection_select :auction_item_id, @auction_items.order(:name), :id, :name %>
+    </div>
+    <%= f.submit 'Adicionar Item' %>
+  <% end %>
+  </div>
+</section>

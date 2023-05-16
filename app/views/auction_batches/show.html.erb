@@ -1,0 +1,42 @@
+<h2>Lote <%= @auction_batch.code %></h2>
+
+<section>
+  <div>
+  <%= link_to 'Adicionar Novo Item', add_item_auction_batch_path(@auction_batch.id) %>
+    <dl>
+        <dt>Quantidade de itens:</dt>
+        <dd><%= @auction_batch.auction_items.count %></dd>
+        <dt><%= AuctionBatch.human_attribute_name(:start_date) %>:</dt>
+        <dd><%= I18n.l(@auction_batch.start_date, format: :short)%></dd>
+        <dt><%= AuctionBatch.human_attribute_name(:end_date) %>:</dt>
+        <dd><%= I18n.l(@auction_batch.end_date, format: :short)%></dd>
+        <dt><%= AuctionBatch.human_attribute_name(:created_by_user) %>:</dt>
+        <dd><%= @auction_batch.created_by_user.name %></dd>
+        <% if @auction_batch.approved_by_user.present?%>
+          <dt><%= AuctionBatch.human_attribute_name(:approved_by_user) %>:</dt>
+          <dd><%= @auction_batch.approved_by_user.name %></dd>
+        <%end%>
+        <dt><%= AuctionBatch.human_attribute_name(:minimum_bid_amount) %>:</dt>
+        <dd>R$ <%= @auction_batch.minimum_bid_amount %>,00</dd>
+        <dt><%= AuctionBatch.human_attribute_name(:minimum_bid_difference) %>:</dt>
+        <dd>R$ <%= @auction_batch.minimum_bid_difference %>,00</dd>
+        <dt><%= AuctionBatch.human_attribute_name(:status) %>:</dt>
+        <dd><%= I18n.t(@auction_batch.status) %></dd>
+    </dl>
+    <% if @auction_batch.pending? && current_user != @auction_batch.created_by_user %>
+      <%= button_to 'Aprovar Lote', approved_auction_batch_path(@auction_batch.id) %>
+    <% end %>
+  </div>
+</section>
+
+<% if !@auction_batch.auction_items.empty?%>
+  <section>
+    <h3>Itens do Lote</h3>
+    <dl>
+      <% @auction_batch.auction_items.each do |ai|  %>
+      <dt><%= link_to ai.name, ai  %></dt>
+      <dd><%= ai.description %></dd>
+      <%end%>
+    </dl>
+  </section>
+<%end%>

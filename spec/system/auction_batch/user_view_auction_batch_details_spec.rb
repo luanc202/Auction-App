@@ -1,20 +1,22 @@
 require 'rails_helper'
 
-describe 'User vê lote para leilão' do
+describe 'Usuário visita Lote para Leilão' do
   it 'não logado' do
     visit root_path
-    visit auction_batches_path
+    visit auction_items_path
 
     expect(current_path).to eq new_user_session_path
   end
+  
   it 'como visitante' do
     user = User.create!(email: 'paulo@email.com', password: '171653', name: 'Paulo', cpf: '04206205086')
 
     login_as(user)
     visit root_path
-    visit auction_batches_path
+    visit auction_items_path
 
-    expect(current_path).to eq auction_batches_path
+    expect(current_path).to eq root_path
+    expect(page).to have_content('Acesso não autorizado.')
   end
 
   it 'com sucesso' do
@@ -32,25 +34,16 @@ describe 'User vê lote para leilão' do
     within 'nav' do
       click_on 'Lotes para Leilão'
     end
+    click_on 'A4K1L9'
 
+    expect(page).not_to have_button('Aprovar Lote')
     expect(page).to have_content('A4K1L9')
     expect(page).to have_content('Quantidade de itens: 1')
-    expect(page).to have_content('Data de início: ' + I18n.l(2.hours.from_now, format: :short))
-    expect(page).to have_content('Data de término: ' + I18n.l(5.days.from_now, format: :short))
+    expect(page).to have_content('Data de início: ' + I18n.l(auction_batch.start_date, format: :short))
+    expect(page).to have_content('Data de término: ' + I18n.l(auction_batch.end_date, format: :short))
+    expect(page).to have_content('Lance inicial: R$ 100,00')
+    expect(page).to have_content('Menor diferença entre lances: R$ 10,00')
     expect(page).to have_content('Criado por: Julia')
     expect(page).to have_content('Status: Aguardando aprovação')
-  end
-
-  it 'e não existem lotes para leilão cadastrados' do
-    user = User.create!(email: 'julia@leilaodogalpao.com.br', password: '@#$GBRD', name: 'Julia', cpf: '04206205086')
-
-    login_as(user)
-    visit root_path
-    within 'nav' do
-      click_on 'Lotes para Leilão'
-    end
-
-    expect(page).not_to have_content('Acesso não autorizado.')
-    expect(page).to have_content('Nenhum Lote para Leilão cadastrado.')
   end
 end

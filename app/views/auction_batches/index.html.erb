@@ -1,5 +1,7 @@
 <h1>Lotes para Leilão</h1>
 
+<%= link_to 'Cadastrar Novo Lote', new_auction_batch_path %>
+
 <section>
     <% @auction_batches.each do |ab| %>
   <div>
@@ -7,17 +9,19 @@
       <dl>
         <dt>Quantidade de itens:</dt>
         <dd><%= ab.auction_items.count %></dd>
-        <dt>Data de início:</dt>
-        <dd><%= I18n.l(ab.start_date, format: :short)%>g</dd>
-        <dt>Data de término:</dt>
-        <dd><%= I18n.l(ab.end_date, format: :short)%>g</dd>
-        <dt>Criado por:</dt>
+        <dt><%= AuctionBatch.human_attribute_name(:start_date) %>:</dt>
+        <dd><%= I18n.l(ab.start_date, format: :short)%></dd>
+        <dt><%= AuctionBatch.human_attribute_name(:end_date) %>:</dt>
+        <dd><%= I18n.l(ab.end_date, format: :short)%></dd>
+        <dt><%= AuctionBatch.human_attribute_name(:created_by_user) %>:</dt>
         <dd><%= ab.created_by_user.name %></dd>
+        <dt><%= AuctionBatch.human_attribute_name(:status) %>:</dt>
+        <dd><%= I18n.t(ab.status) %></dd>
       </dl>
     <% end %>
   </div>
 
   <% if @auction_batches.empty? %>
-    <h2>Nenhum Lote de Leilão cadastrado.</h2>
+    <h2>Nenhum Lote para Leilão cadastrado.</h2>
   <% end %>
 </section>
