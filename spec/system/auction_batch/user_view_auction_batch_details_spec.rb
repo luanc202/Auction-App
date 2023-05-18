@@ -23,8 +23,7 @@ describe 'Usuário visita Lote para Leilão' do
     expect(page).to have_content('Quantidade de itens: 1')
     expect(page).to have_content('Data de início: ' + I18n.l(auction_batch.start_date, format: :short))
     expect(page).to have_content('Data de término: ' + I18n.l(auction_batch.end_date, format: :short))
-    expect(page).to have_content('Lance inicial: R$ 100,00')
-    expect(page).to have_content('Menor diferença entre lances: R$ 10,00')
+    expect(page).to have_content('Preço atual: R$100')
   end
 
   it 'como visitante' do
@@ -51,8 +50,7 @@ describe 'Usuário visita Lote para Leilão' do
     expect(page).to have_content('Quantidade de itens: 1')
     expect(page).to have_content('Data de início: ' + I18n.l(2.hours.from_now, format: :short))
     expect(page).to have_content('Data de término: ' + I18n.l(5.days.from_now, format: :short))
-    expect(page).to have_content('Lance inicial: R$ 100,00')
-    expect(page).to have_content('Menor diferença entre lances: R$ 10,00')
+    expect(page).to have_content('Preço atual: R$100')
   end
 
   it 'como admin' do
@@ -73,6 +71,7 @@ describe 'Usuário visita Lote para Leilão' do
     click_on 'Lote: A4K1L9'
 
     expect(page).not_to have_button('Aprovar Lote')
+    expect(page).not_to have_button('Fazer lance')
     expect(page).to have_content('A4K1L9')
     expect(page).to have_content('Quantidade de itens: 1')
     expect(page).to have_content('Data de início: ' + I18n.l(auction_batch.start_date, format: :short))

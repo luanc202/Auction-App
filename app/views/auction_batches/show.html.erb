@@ -2,9 +2,24 @@
 
 <section>
   <div>
-  <%= link_to 'Adicionar Novo Item', add_item_auction_batch_path(@auction_batch.id) %>
+    <h3>Preço atual: R$<%= @auction_batch.bids.empty? ? @auction_batch.minimum_bid_amount : @auction_batch.bids.last.value + @auction_batch.minimum_bid_difference %></h3>
+    
+    <div>
+    <% if !current_user || !current_user.admin? %>
+      <%= form_with(url: auction_batch_bids_path(@auction_batch.id), method: 'post' ) do |f| %>
+        <%= f.label :value, 'Valor do Lance' %>
+        <%= f.number_field :value %>
+        <%= f.submit 'Fazer lance' %>
+      <% end %>
+    <% end %>
+    </div>
+  </div>
+  <div>
+  <% if @auction_batch.pending? %>
+  <%= link_to 'Adicionar Novo Item', add_item_auction_batch_path(@auction_batch.id)%>
+  <%end%>
     <%= render 'auction_batch_details' %>
-    <% if @auction_batch.pending? && current_user != @auction_batch.created_by_user %>
+    <% if @auction_batch.pending? && current_user != @auction_batch.created_by_user && current_user.admin? %>
       <%= button_to 'Aprovar Lote', approved_auction_batch_path(@auction_batch.id) %>
     <% end %>
   </div>

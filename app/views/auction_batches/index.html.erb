@@ -24,7 +24,7 @@
       <% end %>
     <% end %>
 
-    <% if @auction_batches.empty? %>
+    <% if @auction_batches.select{ |ab| ab.start_date > DateTime.now }.empty? %>
     <h4>Nenhum Lote futuro.</h4>
     <% end %>
   </div>

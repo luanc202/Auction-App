@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_14_180718) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_18_020631) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -74,6 +74,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_180718) do
     t.index ["auction_item_category_id"], name: "index_auction_items_on_auction_item_category_id"
   end
 
+  create_table "bids", force: :cascade do |t|
+    t.integer "value"
+    t.integer "auction_batch_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["auction_batch_id"], name: "index_bids_on_auction_batch_id"
+    t.index ["user_id"], name: "index_bids_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -93,4 +103,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_180718) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "auction_items", "auction_batches"
   add_foreign_key "auction_items", "auction_item_categories"
+  add_foreign_key "bids", "auction_batches"
+  add_foreign_key "bids", "users"
 end

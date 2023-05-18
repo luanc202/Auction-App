@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     post 'approved', on: :member
     get 'add_item', on: :member, to: 'auction_batches#add_item'
     post 'add_item', on: :member, to: 'auction_batches#add_item_save'
+    resources :bids, only: %i[create]
   end
 end

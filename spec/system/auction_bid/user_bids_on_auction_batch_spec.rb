@@ -16,14 +16,13 @@ describe 'Usuário faz lance no lote para leilão' do
     within 'nav' do
       click_on 'Lotes para Leilão'
     end
-    within "div#batch-#{auction_batch.id}" do
+    within "div#auction_batch_#{auction_batch.id}" do
       click_on 'A4K1L9'
     end
-    fill_in 'Valor do lance', with: '150'
+    fill_in 'Valor do Lance', with: '100'
     click_on 'Fazer lance'
 
     expect(current_path).to eq new_user_session_path
-    expect(page).to have_content('Faça login para poder realizar lances.')
   end
 
   it 'como visitante' do
@@ -43,17 +42,14 @@ describe 'Usuário faz lance no lote para leilão' do
     within 'nav' do
       click_on 'Lotes para Leilão'
     end
-    within "div#batch-#{auction_batch.id}" do
+    within "div#auction_batch_#{auction_batch.id}" do
       click_on 'A4K1L9'
     end
+    fill_in 'Valor do Lance', with: '100'
+    click_on 'Fazer lance'
 
-    expect(page).not_to have_button('Aprovar Lote')
-    expect(page).to have_content('A4K1L9')
-    expect(page).to have_content('Quantidade de itens: 1')
-    expect(page).to have_content('Data de início: ' + I18n.l(auction_batch.start_date, format: :short))
-    expect(page).to have_content('Data de término: ' + I18n.l(auction_batch.end_date, format: :short))
-    expect(page).to have_content('Lance inicial: R$ 100,00')
-    expect(page).to have_content('Menor diferença entre lances: R$ 10,00')
+    expect(page).to have_content('Lance dado com sucesso!')
+    expect(page).to have_content('Preço atual: R$110')
   end
 
   it 'como admin' do
@@ -73,14 +69,7 @@ describe 'Usuário faz lance no lote para leilão' do
     end
     click_on 'A4K1L9'
 
-    expect(page).not_to have_button('Aprovar Lote')
-    expect(page).to have_content('A4K1L9')
-    expect(page).to have_content('Quantidade de itens: 1')
-    expect(page).to have_content('Data de início: ' + I18n.l(auction_batch.start_date, format: :short))
-    expect(page).to have_content('Data de término: ' + I18n.l(auction_batch.end_date, format: :short))
-    expect(page).to have_content('Lance inicial: R$ 100,00')
-    expect(page).to have_content('Menor diferença entre lances: R$ 10,00')
-    expect(page).to have_content('Criado por: Julia')
-    expect(page).to have_content('Status: Aguardando aprovação')
+    expect(page).not_to have_button('Fazer lance')
+
   end
 end

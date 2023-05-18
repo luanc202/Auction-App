@@ -7,9 +7,9 @@
   <dd><%= I18n.l(@auction_batch.end_date, format: :short)%></dd>
   <dt><%= AuctionBatch.human_attribute_name(:minimum_bid_amount) %>:</dt>
   <dd>R$ <%= @auction_batch.minimum_bid_amount %>,00</dd>
+  <% if current_user && current_user.admin?%>
   <dt><%= AuctionBatch.human_attribute_name(:minimum_bid_difference) %>:</dt>
   <dd>R$ <%= @auction_batch.minimum_bid_difference %>,00</dd>
-  <% if current_user && current_user.admin?%>
   <dt><%= AuctionBatch.human_attribute_name(:status) %>:</dt>
   <dd><%= I18n.t(@auction_batch.status) %></dd>
     <% if @auction_batch.approved_by_user.present?%>
