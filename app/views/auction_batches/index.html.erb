@@ -3,12 +3,12 @@
 <%= link_to 'Cadastrar Novo Lote', new_auction_batch_path %>
 
 <section>
-  <div>
+  <div id='ongoing-batches'>
   <h2>Lotes em andamento</h2>
     <% @auction_batches.select{ |ab| ab.start_date < DateTime.now }.each do |auction_batch| %>
-    <div>
-      <%= render auction_batch %>
-    </div>
+      <%= content_tag :div, id: dom_id(auction_batch) do %>
+        <%= render auction_batch %>
+      <% end %>
     <% end %>
 
     <% if @auction_batches.select{ |ab| ab.start_date < DateTime.now }.empty? %>
@@ -16,12 +16,12 @@
     <% end %>
   </div>
 
-  <div>
+  <div id='future-batches'>
     <h2>Lotes futuros</h2>
     <% @auction_batches.select{ |ab| ab.start_date > DateTime.now }.each do |auction_batch| %>
-    <div>
-      <%= render auction_batch %>
-    </div>
+      <%= content_tag :div, id: dom_id(auction_batch) do %>
+        <%= render auction_batch %>
+      <% end %>
     <% end %>
 
     <% if @auction_batches.empty? %>
