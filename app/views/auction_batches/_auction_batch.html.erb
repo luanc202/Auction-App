@@ -1,4 +1,5 @@
 <h3><%= link_to "Lote: #{auction_batch.code}", auction_batch %></h3>
+<h3>Preço Atual: R$ <%= auction_batch.bids.empty? ? auction_batch.minimum_bid_amount : auction_batch.bids.last.value + auction_batch.minimum_bid_difference %></h3>
 <dl>
   <dt>Quantidade de itens:</dt>
   <dd><%= auction_batch.auction_items.count %></dd>

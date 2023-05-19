@@ -12,4 +12,5 @@ Rails.application.routes.draw do
     get 'won', on: :collection
     resources :bids, only: %i[create]
   end
+  resources :user_fav_batches, only: %i[index create destroy]
 end

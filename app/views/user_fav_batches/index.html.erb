@@ -1,0 +1,17 @@
+<h1>Favoritos</h1>
+
+<section>
+  <div>
+    <h2>Lotes em andamento</h2>
+    <% @auction_batches.each do |auction_batch| %>
+      <%= content_tag :div, id: dom_id(auction_batch) do %>
+        <%= render auction_batch %>
+        <%= button_to 'Remover', user_fav_batch_path(auction_batch), method: 'delete', params: { at_fav_page: 'true' } %>
+      <% end %>
+    <% end %>
+
+    <% if @auction_batches.empty? %>
+    <h4>Nenhum Lote adicionado aos favoritos.</h4>
+    <% end %>
+  </div>
+</section>
