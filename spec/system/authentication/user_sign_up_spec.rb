@@ -36,7 +36,6 @@ describe 'Usuário se registra' do
       expect(page).to have_content('Bem vindo! Você realizou seu registro com sucesso.')
       expect(page).to have_content('marcio@leilaodogalpao.com.br')
       expect(page).to have_button('Sair')
-      expect(page).to have_button('Painel Admin')
       user = User.last
       expect(user.name).to eq('Márcio')
     end

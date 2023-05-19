@@ -6,7 +6,7 @@
     <% @auction_batches.each do |auction_batch| %>
       <%= content_tag :div, id: dom_id(auction_batch) do %>
         <%= render auction_batch %>
-        <%= button_to 'Remover', user_fav_batch_path(auction_batch), method: 'delete', params: { at_fav_page: 'true' } %>
+        <%= button_to 'Remover', user_fav_batch_path(auction_batch), method: 'delete', params: { at_fav_page: 'true' }, class: 'btn btn-danger' %>
       <% end %>
     <% end %>
 

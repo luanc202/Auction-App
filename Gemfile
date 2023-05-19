@@ -34,3 +34,5 @@ group :development do
 end
 
 gem "ruby-vips", "~> 2.1"
+
+gem "cssbundling-rails", "~> 1.1"

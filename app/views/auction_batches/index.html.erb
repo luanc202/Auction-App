@@ -1,11 +1,13 @@
-<h1>Lotes para Leilão</h1>
 
-<%= link_to 'Cadastrar Novo Lote', new_auction_batch_path %>
-<% if current_user && current_user.admin?%>
-  <%= link_to 'Lotes Expirados', expired_auction_batches_path %>
-<%end%>
+<div class="container-md">
+<h1 class="h1">Lotes para Leilão</h1>
+  <%= link_to 'Cadastrar Novo Lote', new_auction_batch_path, class: 'btn btn-primary'%>
+  <% if current_user && current_user.admin?%>
+    <%= link_to 'Lotes Expirados', expired_auction_batches_path, class: 'btn btn-outline-primary' %>
+  <%end%>
+</div>
 
-<section>
+<div class="container-md">
   <div id='ongoing-batches'>
   <h2>Lotes em andamento</h2>
     <% @auction_batches.select{ |ab| ab.start_date < DateTime.now }.each do |auction_batch| %>
@@ -31,4 +33,4 @@
     <h4>Nenhum Lote futuro.</h4>
     <% end %>
   </div>
-</section>
+</div>

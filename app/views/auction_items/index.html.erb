@@ -1,10 +1,10 @@
+
+<section class="container-md">
 <h1>Itens para Leilão</h1>
 
-<%= link_to 'Cadastrar Novo', new_auction_item_path %>
-
-<section>
+<%= link_to 'Cadastrar Novo', new_auction_item_path, class: 'btn btn-primary' %>
     <% @auction_items.each do |ai| %>
-  <div>
+  <div class="container-md">
       <h3><%= link_to ai.name, ai %></h3>
       <div>
         <%= image_tag ai.image, id: 'auction-item-image' %>

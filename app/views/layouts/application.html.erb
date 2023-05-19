@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application" %>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
 
   <body>
     <header>
-      <nav>
+      <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
         <%= link_to root_path do %>
-          <h1>Leilões de Estoque</h1>
+          <h1 class="navbar-brand">Leilões de Estoque</h1 >
         <% end %>
         <%= link_to 'Lotes para Leilão', auction_batches_path %>
         <% if user_signed_in? %>
             <%= current_user.description %>
-            <%= button_to 'Sair', destroy_user_session_path, method: :delete %>
+            <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: 'btn btn-secondary' %>
             <%= link_to 'Lotes Favoritos', user_fav_batches_path %>
             <% if current_user.admin? %>
-              <%= button_to 'Painel Admin' %>
               <%= link_to 'Itens para Leilão', auction_items_path %>
             <% end %>
             <% if !current_user.admin? %>
@@ -29,7 +29,8 @@
             <% end %>
           <% else %>
             <%= link_to 'Entrar', new_user_session_path %>
-        <% end %>
+          <% end %>
+        </div>
       </nav>
     </header>
     <main>

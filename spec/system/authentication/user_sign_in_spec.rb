@@ -40,7 +40,6 @@ describe 'Usuário se autentica' do
         expect(page).not_to have_link('Entrar')
         expect(page).to have_button('Sair')
         expect(page).to have_content('Paulo | paulo@leilaodogalpao.com.br')
-        expect(page).to have_button('Painel Admin')
       end
       expect(page).to have_content('Login efetuado com sucesso.')
     end
