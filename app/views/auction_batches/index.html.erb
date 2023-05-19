@@ -1,6 +1,9 @@
 <h1>Lotes para Leilão</h1>
 
 <%= link_to 'Cadastrar Novo Lote', new_auction_batch_path %>
+<% if current_user && current_user.admin?%>
+  <%= link_to 'Lotes Expirados', expired_auction_batches_path %>
+<%end%>
 
 <section>
   <div id='ongoing-batches'>

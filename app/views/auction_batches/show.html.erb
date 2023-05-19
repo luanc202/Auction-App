@@ -5,7 +5,7 @@
     <h3>Preço atual: R$<%= @auction_batch.bids.empty? ? @auction_batch.minimum_bid_amount : @auction_batch.bids.last.value + @auction_batch.minimum_bid_difference %></h3>
     
     <div>
-    <% if !current_user || !current_user.admin? %>
+    <% if (!current_user || !current_user.admin?) && @auction_batch.end_date > Time.current %>
       <%= form_with(url: auction_batch_bids_path(@auction_batch.id), method: 'post' ) do |f| %>
         <%= f.label :value, 'Valor do Lance' %>
         <%= f.number_field :value %>

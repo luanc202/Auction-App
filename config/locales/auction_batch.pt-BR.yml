@@ -2,6 +2,7 @@ pt-BR:
   pending: 'Aguardando aprovação'
   approved: 'Aprovado'
   finished: 'Finalizado'
+  cancelled: 'Cancelado'
   activerecord:
     models:
       auction_batch:

@@ -1,13 +1,13 @@
 class AuctionBatchesController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
-  before_action :allow_if_admin, except: %i[index show]
+  before_action :allow_if_admin, except: %i[index show won]
   before_action :set_auction_batch, only: %i[show edit update approved add_item add_item_save]
 
   def index
     @auction_batches = if current_user && current_user.admin?
-                         AuctionBatch.all
+                         AuctionBatch.where('end_date > ?', Time.current)
                        else
-                         AuctionBatch.where(status: :approved)
+                         AuctionBatch.where('end_date > ?', Time.current).where(status: :approved)
                        end
   end
 
@@ -51,6 +51,36 @@ class AuctionBatchesController < ApplicationController
       flash.now[:notice] = 'Não foi possível adicionar o Item ao Lote.'
       render :add_item
     end
+  end
+
+  def expired
+    @auction_batches = AuctionBatch.where('end_date < ?', Time.current)
+  end
+
+  def finished
+    @auction_batch = AuctionBatch.find(params[:id])
+    @auction_batch.finished!
+    won_auction_batch = WonAuctionBatch.new(auction_batch: @auction_batch, user: @auction_batch.bids.last.user)
+    if won_auction_batch.save
+      redirect_to expired_auction_batches_path, notice: 'Lote finalizado com sucesso.'
+    else
+      redirect_to expired_auction_batches_path, notice: 'Não foi possível finalizar o Lote.'
+    end
+  end
+
+  def cancelled
+    @auction_batch = AuctionBatch.find(params[:id])
+    @auction_batch.cancelled!
+    @auction_batch.auction_items.each do |auction_item|
+      auction_item.auction_batch = nil
+      auction_item.save
+    end
+    redirect_to expired_auction_batches_path, notice: 'Lote cancelado com sucesso.'
+  end
+
+  def won 
+    auctions = current_user.won_auction_batch.map(&:auction_batch_id)
+    @auction_batches = AuctionBatch.where(id: auctions)
   end
 
   private

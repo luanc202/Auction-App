@@ -1,0 +1,32 @@
+<h1>Leilões Vencidos</h1>
+<% @auction_batches.each do |auction_batch| %>
+  <section>
+    <div>
+      <h3>Lote <%= auction_batch.code %></h3>
+      <dl>
+        <dt>Quantidade de itens:</dt>
+        <dd><%= auction_batch.auction_items.count %></dd>
+        <dt><%= AuctionBatch.human_attribute_name(:end_date) %>:</dt>
+        <dd><%= I18n.l(auction_batch.end_date, format: :short)%></dd>
+        <dt>Valor final:</dt>
+        <dd>R$<%= auction_batch.bids.last.value %>,00</dd>
+      </dl>
+    </div>
+    <div>
+      <h3>Itens</h3>
+      <% auction_batch.auction_items.each do |auction_item| %>
+        <dl>
+          <dd><%= image_tag auction_item.image %></dd>
+          <dt><%= auction_item.name %></dt>
+          <dd><%= auction_item.description %></dd>
+          <dt><%= AuctionItemCategory.human_attribute_name(:name) %>:</dt>
+          <dd><%= auction_item.auction_item_category.name %></dd>
+          <dt>Dimensões:</dt>
+          <dd><%= auction_item.width %>cm x <%= auction_item.height %>cm x <%= auction_item.depth %>cm</dd>
+          <dt><%= AuctionItem.human_attribute_name(:weight) %>:</dt>
+          <dd><%= auction_item.weight %>g</dd>
+        </dl>
+      <% end %>
+    </div>
+  </section>
+<% end %>

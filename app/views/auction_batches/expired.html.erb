@@ -1,0 +1,9 @@
+<h1>Lotes Expirados</h1>
+
+<section>
+  <%= render partial: 'expired_batch_details', collection: @auction_batches, as: :auction_batch %>  
+
+  <% if @auction_batches.empty? %>
+    <h4>Nenhum Lote expirado.</h4>
+  <% end %>
+</section>

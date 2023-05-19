@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     post 'approved', on: :member
     get 'add_item', on: :member, to: 'auction_batches#add_item'
     post 'add_item', on: :member, to: 'auction_batches#add_item_save'
+    get 'expired', on: :collection
+    post 'finished', on: :member
+    post 'cancelled', on: :member
+    get 'won', on: :collection
     resources :bids, only: %i[create]
   end
 end

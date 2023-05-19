@@ -23,6 +23,9 @@
               <%= button_to 'Painel Admin' %>
               <%= link_to 'Itens para Leilão', auction_items_path %>
             <% end %>
+            <% if !current_user.admin? %>
+              <%= link_to 'Leilões Vencidos', won_auction_batches_path %>
+            <% end %>
           <% else %>
             <%= link_to 'Entrar', new_user_session_path %>
         <% end %>
