@@ -26,6 +26,7 @@ Para rodar os testes, basta rodar o comando `rspec` dentro do diretório do proj
 - [x] Validando Resultados
 - [x] Verificando Lotes Vencidos
 - [x] Bônus - Lotes Favoritos
+- [x] Bônus - Dúvidas sobre um lote
 
 ## Imagem do esquema do banco de dados
 
