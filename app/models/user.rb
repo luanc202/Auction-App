@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :bids
   has_many :won_auction_batch
   has_many :user_fav_batch
+  has_many :auction_questions
+  has_many :auction_questions_reply
 
   enum role: { user: 0, admin: 1 }
 

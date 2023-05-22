@@ -29,6 +29,43 @@
       <%= button_to 'Aprovar Lote', approved_auction_batch_path(@auction_batch.id), class: 'btn btn-primary' %>
     <% end %>
   </div>
+  <div class="container-md">
+    <h3>Perguntas</h3>
+    <ul class="list-group">
+    <% @questions.each do |question| %>
+      <li class="list-group-item">
+        <% if user_signed_in? && current_user.admin?%>
+        <p>Status: <span class="text-danger fw-bold"><%= I18n.t(question.status) %></span></p>
+          <dl>
+            <dt>Nome:</dt>
+            <dd><%= question.user.name %></dd>
+            <dt>Email:</dt>
+            <dd><%= question.user.email %></dd>
+          </dl>
+          <% if question.hidden?%>
+            <%= button_to 'Exibir pergunta', display_auction_question_path(question.id), method: 'post', class: 'btn btn-primary' %>
+          <% else %>
+            <%= button_to 'Ocultar pergunta', hidden_auction_question_path(question.id), method: 'post', class: 'btn btn-danger' %>
+          <%end%>
+        <% end %>
+        <p><span class="text-primary fw-bold">P: </span><%= question.question %></p>
+        <% if question.auction_question_reply %>
+          <p><span class="text-success fw-bold">R: </span><%= question.auction_question_reply.reply %></p>
+        <%end%>
+      </li>
+    <% end %>
+    </ul>
+    <div>
+      <% unless (user_signed_in? && current_user.admin?)%>
+        <%= form_with(url: auction_questions_path(@auction_batch.id), method: 'post' ) do |f| %>
+          <%= f.label :question, 'Pergunta' %>
+          <%= f.text_area :question %>
+          <%= hidden_field_tag :auction_batch_id, @auction_batch.id %>
+          <%= f.submit 'Enviar' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </section>
 
 <% if !@auction_batch.auction_items.empty?%>

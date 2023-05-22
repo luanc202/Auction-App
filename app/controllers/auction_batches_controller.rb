@@ -13,6 +13,11 @@ class AuctionBatchesController < ApplicationController
 
   def show
     @auction_batch = AuctionBatch.find(params[:id])
+    if user_signed_in? && current_user.admin?
+      @questions = AuctionQuestion.where(auction_batch_id: @auction_batch.id)
+    else
+      @questions = AuctionQuestion.where(auction_batch_id: @auction_batch.id, status: :display)
+    end
   end
 
   def new

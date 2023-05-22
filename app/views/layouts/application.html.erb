@@ -23,6 +23,7 @@
             <%= link_to 'Lotes Favoritos', user_fav_batches_path %>
             <% if current_user.admin? %>
               <%= link_to 'Itens para Leilão', auction_items_path %>
+              <%= link_to 'Perguntas Pendentes', auction_question_replies_path %>
             <% end %>
             <% if !current_user.admin? %>
               <%= link_to 'Leilões Vencidos', won_auction_batches_path %>

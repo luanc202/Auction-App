@@ -1,0 +1,12 @@
+pt-BR:
+  hidden: 'Oculto'
+  display: 'Exibido'
+  activerecord:
+    models:
+      auction_question:
+        one: 'Pergunta'
+        other: 'Perguntas'
+    attributes:
+      auction_question:
+        question: 'Pergunta'
+        status: 'Status'

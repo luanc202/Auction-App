@@ -1,0 +1,27 @@
+
+<section class="container-md">
+<h1>Perguntas não respondidas</h1>
+
+<%= link_to 'Cadastrar Novo', new_auction_item_path, class: 'btn btn-primary' %>
+    <% @auction_questions.each do |auction_question| %>
+  <div class="container-md">
+      <h3>Pertence ao lote <%= link_to auction_question.auction_batch.code, auction_question.auction_batch %></h3>
+      <dl>
+        <dt>Pergunta:</dt>
+        <dd><%= auction_question.question %></dd>
+        <dt>Feita por:</dt>
+        <dd><%= auction_question.user.name %> - <%= auction_question.user.email %></dd>
+      </dl>
+      <%= form_with(url: auction_question_replies_path, method: 'post' ) do |f| %>
+        <%= hidden_field_tag :auction_question_id, auction_question.id %>
+        <%= f.label :reply, 'Resposta' %>
+        <%= f.text_area :reply %> <br>
+        <%= f.submit 'Enviar' %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <% if @auction_questions.empty? %>
+    <h2>Nenhuma pergunta sem resposta encontrada.</h2>
+  <% end %>
+</section>

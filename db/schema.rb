@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_19_002231) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_21_155911) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -74,6 +74,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_002231) do
     t.index ["auction_item_category_id"], name: "index_auction_items_on_auction_item_category_id"
   end
 
+  create_table "auction_question_replies", force: :cascade do |t|
+    t.string "reply"
+    t.integer "user_id", null: false
+    t.integer "auction_question_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["auction_question_id"], name: "index_auction_question_replies_on_auction_question_id"
+    t.index ["user_id"], name: "index_auction_question_replies_on_user_id"
+  end
+
+  create_table "auction_questions", force: :cascade do |t|
+    t.string "question"
+    t.integer "status", default: 0
+    t.integer "user_id", null: false
+    t.integer "auction_batch_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["auction_batch_id"], name: "index_auction_questions_on_auction_batch_id"
+    t.index ["user_id"], name: "index_auction_questions_on_user_id"
+  end
+
   create_table "bids", force: :cascade do |t|
     t.integer "value"
     t.integer "auction_batch_id", null: false
@@ -121,6 +142,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_19_002231) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "auction_items", "auction_batches"
   add_foreign_key "auction_items", "auction_item_categories"
+  add_foreign_key "auction_question_replies", "auction_questions"
+  add_foreign_key "auction_question_replies", "users"
+  add_foreign_key "auction_questions", "auction_batches"
+  add_foreign_key "auction_questions", "users"
   add_foreign_key "bids", "auction_batches"
   add_foreign_key "bids", "users"
   add_foreign_key "user_fav_batches", "auction_batches"
