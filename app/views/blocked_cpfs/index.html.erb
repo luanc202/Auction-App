@@ -1,0 +1,35 @@
+
+<div class="container-md">
+  <h1 class="h1">CPFs bloqueados</h1>
+
+  <%= form_with(model: @new_blocked_cpf) do |f| %>
+  <h5>Bloquear novo CPF</h5>
+   <div class="mb-3">
+      <%= f.label :cpf %>
+      <%= f.text_field :cpf %>
+      <%= f.submit 'Bloquear CPF', class: 'btn btn-warning' %>
+    </div>
+  <% end %>
+</div>
+
+<div class="container-md">
+  <div id='blocked-cpfs'>
+  <ul class="list-group">
+    <% @blocked_cpfs.each do |blocked_cpf| %>
+      <%= content_tag :div, id: dom_id(blocked_cpf) do %>
+        
+        <li class="list-group-item">
+          <dl>
+            <dt>CPF:</dt>
+            <dd><%= blocked_cpf.cpf %></dd>
+          </dl>
+          <%= button_to 'Desbloquear CPF', blocked_cpf_path(blocked_cpf), method: :delete, class: 'btn btn-secondary' %>
+      <% end %>
+    <% end %>
+  </ul>
+
+    <% if @blocked_cpfs.empty? %>
+    <h4>Nenhum CPF bloqueado.</h4>
+    <% end %>
+  </div>
+</div>

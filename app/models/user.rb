@@ -17,6 +17,7 @@ class User < ApplicationRecord
   validates :name, :email, :password, :cpf, presence: true
   validates :cpf, uniqueness: true
   validate :check_cpf
+  validate :cpf_blocked
 
   before_validation :make_admin_if_email, on: :create
 
@@ -31,13 +32,13 @@ class User < ApplicationRecord
   end
 
   def check_cpf
-    if cpf.length != 11 
+    if cpf.length != 11
       errors.add(:cpf, 'deve ter 11 dígitos')
       return
     end
 
     if cpf.chars.uniq.size == 1
-      errors.add(:cpf, "cpf com todos dígitos iguais é inválido")
+      errors.add(:cpf, 'cpf com todos dígitos iguais é inválido')
       return
     end
 
@@ -48,10 +49,17 @@ class User < ApplicationRecord
     sum = 0
     10.times { |i| sum += cpf[i].to_i * (11 - i) }
     digit2 = (sum * 10 % 11) % 10
-    
+
     return if cpf[-2..-1] == "#{digit1}#{digit2}"
 
     errors.add(:cpf, 'deve ser válido')
+    nil
+  end
+
+  def cpf_blocked
+    return unless BlockedCpf.find_by(cpf:)
+
+    errors.add(:cpf, 'está bloqueado')
     nil
   end
 end

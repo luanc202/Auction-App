@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'auction_batches#index'
   resources :auction_items, only: %i[index new create show]
   resources :auction_questions, only: %i[index]
+  resources :blocked_cpfs, only: %i[index new create destroy]
   resources :auction_batches, only: %i[index show new create] do
     post 'approved', on: :member
     get 'add_item', on: :member, to: 'auction_batches#add_item'
