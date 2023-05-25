@@ -28,10 +28,10 @@ Para rodar os testes, basta rodar o comando `rspec` dentro do diretório do proj
 - [x] Bônus - Lotes Favoritos
 - [x] Bônus - Dúvidas sobre um lote
 - [x] Bônus - Bloqueio de CPFs
+- [x] Bônus - Busca de Lotes e Itens
 
 ## Tarefas pendentes
 
-- [ ] Bônus - Busca de Produtos
 - [ ] Extra - Testes de Request
 ## Imagem do esquema do banco de dados
 

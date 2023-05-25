@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     post 'cancelled', on: :member
     get 'won', on: :collection
     resources :bids, only: %i[create]
+    get 'search', on: :collection
   end
   resources :user_fav_batches, only: %i[index create destroy]
   resources :auction_questions, only: %i[create] do

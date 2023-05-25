@@ -1,0 +1,25 @@
+<div class="container-md">
+  <h1>Resultados da Busca por: <%= @search %></h1>
+  <div class="container-md">
+    <p><%= @auction_batches.count %> <%= AuctionBatch.model_name.human(count: @auction_batches.count).downcase %> <%= t(:found, count: @auction_batches.count) %></p>
+    <% @auction_batches.each do |auction_batch| %>
+      <%= render auction_batch %>
+    <% end %>
+  </div>
+
+  <div class="container-md">
+    <p><%= @auction_items.count %> <%= AuctionItem.model_name.human(count: @auction_items.count).downcase %> <%= t(:found, count: @auction_items.count) %></p>
+      <ul class="list-group">
+    <% @auction_items.each do |auction_item| %>
+        <li class="list-group-item">
+          <dl>
+            <dt>Item:</dt>
+            <dd><%= auction_item.name %></dd>
+            <dt>Lote:</dt>
+            <dd><%= link_to auction_item.auction_batch.code, auction_item.auction_batch %></dd>
+          </dl>
+        </li>
+    <% end %>
+      </ul>
+  </div>
+</div>

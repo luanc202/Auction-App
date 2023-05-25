@@ -4,7 +4,7 @@
 
   <%= form_with(model: @new_blocked_cpf) do |f| %>
   <h5>Bloquear novo CPF</h5>
-   <div class="mb-3">
+   <div class="mb-3" id="block-form">
       <%= f.label :cpf %>
       <%= f.text_field :cpf %>
       <%= f.submit 'Bloquear CPF', class: 'btn btn-warning' %>

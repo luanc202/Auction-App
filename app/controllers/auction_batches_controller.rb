@@ -1,6 +1,6 @@
 class AuctionBatchesController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show]
-  before_action :allow_if_admin, except: %i[index show won]
+  before_action :authenticate_user!, except: %i[index show search]
+  before_action :allow_if_admin, except: %i[index show won search]
   before_action :set_auction_batch, only: %i[show edit update approved add_item add_item_save]
 
   def index
@@ -13,11 +13,11 @@ class AuctionBatchesController < ApplicationController
 
   def show
     @auction_batch = AuctionBatch.find(params[:id])
-    if user_signed_in? && current_user.admin?
-      @questions = AuctionQuestion.where(auction_batch_id: @auction_batch.id)
-    else
-      @questions = AuctionQuestion.where(auction_batch_id: @auction_batch.id, status: :display)
-    end
+    @questions = if user_signed_in? && current_user.admin?
+                   AuctionQuestion.where(auction_batch_id: @auction_batch.id)
+                 else
+                   AuctionQuestion.where(auction_batch_id: @auction_batch.id, status: :display)
+                 end
   end
 
   def new
@@ -83,9 +83,16 @@ class AuctionBatchesController < ApplicationController
     redirect_to expired_auction_batches_path, notice: 'Lote cancelado com sucesso.'
   end
 
-  def won 
+  def won
     auctions = current_user.won_auction_batch.map(&:auction_batch_id)
     @auction_batches = AuctionBatch.where(id: auctions)
+  end
+
+  def search
+    @search = params[:query]
+    @auction_batches = AuctionBatch.where('code LIKE ?', "%#{params[:query]}%").where('end_date > ?',
+                                                                                      Time.current).where(status: :approved)
+    @auction_items = AuctionItem.where('name LIKE ?', "%#{params[:query]}%")
   end
 
   private

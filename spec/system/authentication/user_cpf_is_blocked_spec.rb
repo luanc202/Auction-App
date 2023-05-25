@@ -27,9 +27,9 @@ describe 'Usuário com CPF bloqueado' do
       within 'nav' do
         click_on 'Entrar'
       end
-      fill_in 'E-mail', with: 'paulo@leilaodogalpao.com.br'
-      fill_in 'Senha', with: '171653'
-      within 'form' do
+      within 'form#new_user' do
+        fill_in 'E-mail', with: 'paulo@leilaodogalpao.com.br'
+        fill_in 'Senha', with: '171653'
         click_on 'Entrar'
       end
       click_on 'Lotes para Leilão'
