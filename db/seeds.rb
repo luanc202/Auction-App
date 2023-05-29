@@ -1,7 +1,49 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'active_support/testing/time_helpers'
+
+include ActiveSupport::Testing::TimeHelpers
+extend ActiveSupport::Testing::TimeHelpers
+
+user = User.create!(email: 'julia@leilaodogalpao.com.br', password: '@#$GBRD', name: 'Julia', cpf: '04206205086')
+guest_user = User.create!(email: 'paulo@email.com', password: '171653', name: 'Paulo', cpf: '96749196004')
+
+auction_item_category = AuctionItemCategory.create!(name: 'Eletrônicos')
+second_auction_item_category = AuctionItemCategory.create!(name: 'Móveis')
+
+travel_to 5.days.ago
+auction_batch = AuctionBatch.create!(code: 'A4K1L9', start_date: 2.hours.from_now, end_date: 14.days.from_now, minimum_bid_amount: 201,
+                                     minimum_bid_difference: 10, created_by_user_id: user.id)
+auction_batch.approved!
+second_batch = AuctionBatch.create!(code: '2GWD34', start_date: 4.hours.from_now, end_date: 12.days.from_now, minimum_bid_amount: 505,
+                                    minimum_bid_difference: 10, created_by_user_id: user.id)
+second_batch.approved!
+third_batch = AuctionBatch.create!(code: 'J3EQ97', start_date: 6.hours.from_now, end_date: 15.days.from_now, minimum_bid_amount: 700,
+                                   minimum_bid_difference: 10, created_by_user_id: user.id)
+travel_back
+
+auction_item = AuctionItem.create!(name: 'TV Samsung 32', description: 'Samsung Smart TV 32 polegadas HDR LED 4K', weight: 10_000, width: 50,
+                                   height: 70, depth: 10, auction_item_category_id: auction_item_category.id, auction_batch_id: auction_batch.id)
+auction_item.image.attach(io: File.open('spec/fixtures/tv-imagem.png'), filename: 'tv-imagem.png',
+                          content_type: 'image/png')
+auction_item_3 = AuctionItem.create!(name: 'Mesa de Escritório', description: 'Mesa de escritório em MDF e pernas de aço', weight: 40_000, width: 100,
+                                     height: 60, depth: 50, auction_item_category_id: second_auction_item_category.id, auction_batch_id: third_batch.id)
+auction_item_3.image.attach(io: File.open('spec/fixtures/desk.jpg'), filename: 'desk.jpg',
+                            content_type: 'image/jpg')
+auction_item_2 = AuctionItem.create!(name: 'TV Philips 32', description: 'Philips Smart TV 32 polegadas LCD 2K', weight: 8_000, width: 40,
+                                     height: 50, depth: 10, auction_item_category_id: auction_item_category.id, auction_batch_id: second_batch.id)
+auction_item_2.image.attach(io: File.open('spec/fixtures/tv-imagem.png'), filename: 'tv-imagem.png',
+                            content_type: 'image/png')
+
+bid = Bid.create!(auction_batch_id: auction_batch.id, user_id: guest_user.id, value: 220)
+
+auction_batch.auction_questions.create!(user: guest_user, question: 'Algum dos itens está danificado ou aberto?')
+auction_batch.auction_questions.create!(user: guest_user, question: 'É possível fazer retirada?')
+second_batch.auction_questions.create!(user: guest_user,
+                                       question: 'São apenas itens eletrônicos?')
+
+reply = AuctionQuestionReply.create!(user:, auction_question: auction_batch.auction_questions.first,
+                                     reply: 'Não, todos lacrados e intactos. Em caso de danos ou lacre violado, o comprador poderá devolver o item e receber o dinheiro de volta.')
+
+user_fav_batch = UserFavBatch.create!(user: guest_user, auction_batch:)
+
+BlockedCpf.create!(cpf: '49914857035')
+BlockedCpf.create!(cpf: '00742158098')
