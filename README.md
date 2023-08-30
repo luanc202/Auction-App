@@ -1,33 +1,41 @@
 # Projeto de Leilão de Estoque para o Treinadev 10
 
-Esta aplicação Ruby on Rails é uma aplicação web desenvolvida, ela fornece uma maneira simples de gerenciar e lotes de leilão, seus itens, perguntas, imagens, lances e gerenciar usuários.
+Esta aplicação Ruby on Rails é uma aplicação web desenvolvida como parte do programa [Treinadev]() 10, ela fornece uma maneira simples de gerenciar e lotes de leilão, seus itens, perguntas, imagens, lances e gerenciar usuários.
 
-## Instalação e configuração
-
-Para começar a trabalhar com esta aplicação, siga estas etapas:
-
-1. Instale o Ruby: Certifique-se de que você tenha o Ruby instalado em seu computador. Você pode verificar isso executando `ruby -v`. Se você não tiver o Ruby, você pode seguir ~[os guias de aprendizado do Ruby](https://guides.rubyonrails.org/getting_started.html)~.
-
-2. Instale o Rails: Se ainda não instalou o Rails, siga o ~[guia de instalação oficial do Rails](https://guides.rubyonrails.org/getting_started.html)~.
-
-## Requisitos e versões
+## Requisitos e Versões
 * Ruby version: 3.2.1
 
 * System dependencies: 
   - libvips 8.14.2-1 
   - openslide 3.4.1-4 
 
-## Configurações
+## Instalação e Configuração
 
- Clone o projeto com `git clone` e rode o comando `bundle install` dentro do diretório par onde clonou para instalar as dependências.
- 
- Como foi utilizado SQLite3, não é necessário configurar o banco de dados, basta rodar o comando `rails db:migrate` para criar as tabelas e `rails db:seed` para popular o banco de dados com dados de teste.
+Para começar a trabalhar com esta aplicação, siga estas etapas:
 
- Em seguida, rode o comando `rails server` para iniciar o servidor e acesse `http://localhost:3000` para acessar a aplicação.
+1.  Clone o projeto com `git clone` e rode o comando `bundle install` dentro do diretório par onde clonou para instalar as dependências.
 
-## Rodando testes
+2. Instale o Ruby: Certifique-se de que você tenha o Ruby instalado em seu computador. Você pode verificar isso executando `ruby -v`. Se você não tiver o Ruby, você pode seguir [os guias de aprendizado do Ruby](https://guides.rubyonrails.org/getting_started.html).
 
-Para rodar os testes, basta rodar o comando `rspec` dentro do diretório do projeto.
+3. Instale o Rails: Se ainda não instalou o Rails, siga o [guia de instalação oficial do Rails](https://guides.rubyonrails.org/getting_started.html).
+
+4. Dentro da pasta do projeto, use o comando `bin/setup`, pois, ele fará as tarefas e configurações necessárias para rodar o projeto.
+
+5. Por fim, pode usar o comando `bin/rails db:seed` para popular o banco de dados com dados de teste.
+
+## Iniciando a Aplicação
+
+ Use o comando `bin/dev` dentro da pasta do repositório para iniciar o servidor e acesse `http://localhost:3000` para acessar a aplicação.
+
+## Rodando testes com o RSpec
+
+Existem três principais formas de executar os testes:
+
+Usando o `rspec` para rodar todos os testes da forma padrão;
+
+Usando o `rspec --format d` para rodar os testes no formato de documentação, mostrando todos os textos dos casos de teste;
+
+Usando o `rspec --format p` para ver os testes na forma de progresso, sem o texto dos testes e apenas uma lista de pontos que representam cada caso de teste.
 
 ## Tarefas realizadas
 
@@ -46,6 +54,11 @@ Para rodar os testes, basta rodar o comando `rspec` dentro do diretório do proj
 ## Tarefas pendentes
 
 - [ ] Extra - Testes de Request
-## Imagem do esquema do banco de dados
+- [ ] Feedback - Popular seeds
+- [ ] Feedback - Aumentar cobertura de testes para 99%
+- [ ] Feedback - Melhorar nomenclatura de modelos e métodos
+- [ ] Feedback - Padronizar o fronted
+- [ ] Feedback - Consertar formulário onde não indica o que ocasionou a falha ao enviar
+## Esquema do Banco de Dados Ilustrado
 
 ![image](database-schema.png)
