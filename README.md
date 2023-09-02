@@ -1,6 +1,6 @@
 # Projeto de Leilão de Estoque para o Treinadev 10
 
-Esta aplicação Ruby on Rails é uma aplicação web desenvolvida como parte do programa [Treinadev]() 10, ela fornece uma maneira simples de gerenciar e lotes de leilão, seus itens, perguntas, imagens, lances e gerenciar usuários.
+Esta aplicação Ruby on Rails é uma aplicação web desenvolvida como parte do programa [Treinadev](https://treinadev.com.br/) 10, ela fornece uma maneira simples de gerenciar e lotes de leilão, seus itens, perguntas, imagens, lances e gerenciar usuários.
 
 ## Requisitos e Versões
 * Ruby version: 3.2.1
@@ -13,7 +13,7 @@ Esta aplicação Ruby on Rails é uma aplicação web desenvolvida como parte do
 
 Para começar a trabalhar com esta aplicação, siga estas etapas:
 
-1.  Clone o projeto com `git clone` e rode o comando `bundle install` dentro do diretório par onde clonou para instalar as dependências.
+1.  Clone o projeto com `git clone` e entre na pasta do projeto para os próximos passos.
 
 2. Instale o Ruby: Certifique-se de que você tenha o Ruby instalado em seu computador. Você pode verificar isso executando `ruby -v`. Se você não tiver o Ruby, você pode seguir [os guias de aprendizado do Ruby](https://guides.rubyonrails.org/getting_started.html).
 
@@ -25,7 +25,7 @@ Para começar a trabalhar com esta aplicação, siga estas etapas:
 
 ## Iniciando a Aplicação
 
- Use o comando `bin/dev` dentro da pasta do repositório para iniciar o servidor e acesse `http://localhost:3000` para acessar a aplicação.
+ Use o comando `bin/dev` dentro da pasta do repositório para iniciar o servidor e acesse http://localhost:3000 para acessar a aplicação.
 
 ## Rodando testes com o RSpec
 
@@ -50,11 +50,11 @@ Usando o `rspec --format p` para ver os testes na forma de progresso, sem o text
 - [x] Bônus - Dúvidas sobre um lote
 - [x] Bônus - Bloqueio de CPFs
 - [x] Bônus - Busca de Lotes e Itens
+- [x] Feedback - Popular seeds
 
 ## Tarefas pendentes
 
 - [ ] Extra - Testes de Request
-- [ ] Feedback - Popular seeds
 - [ ] Feedback - Aumentar cobertura de testes para 99%
 - [ ] Feedback - Melhorar nomenclatura de modelos e métodos
 - [ ] Feedback - Padronizar o fronted
