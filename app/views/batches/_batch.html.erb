@@ -1,0 +1,18 @@
+<div class="container-md">
+  <h3><%= link_to "Lote: #{batch.code}", batch %></h3>
+  <h3>Preço Atual: R$ <%= batch.bids.empty? ? batch.minimum_bid_amount : batch.bids.last.value + batch.minimum_bid_difference %></h3>
+  <dl>
+    <dt>Quantidade de itens:</dt>
+    <dd><%= batch.auction_items.count %></dd>
+    <dt><%= Batch.human_attribute_name(:start_date) %>:</dt>
+    <dd><%= I18n.l(batch.start_date, format: :short)%></dd>
+    <dt><%= Batch.human_attribute_name(:end_date) %>:</dt>
+    <dd><%= I18n.l(batch.end_date, format: :short)%></dd>
+    <% if current_user && current_user.admin? %>
+      <dt><%= Batch.human_attribute_name(:created_by_user) %>:</dt>
+      <dd><%= batch.created_by_user.name %></dd>
+      <dt><%= Batch.human_attribute_name(:status) %>:</dt>
+      <dd><%= I18n.t(batch.status) %></dd>
+    <%end%>
+  </dl>
+</div>

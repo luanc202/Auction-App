@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_24_220210) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_02_173251) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,19 +39,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_220210) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "auction_batches", force: :cascade do |t|
-    t.string "code"
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.integer "minimum_bid_amount"
-    t.integer "minimum_bid_difference"
-    t.integer "status", default: 0
-    t.integer "approved_by_user_id"
-    t.integer "created_by_user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "auction_item_categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -69,9 +56,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_220210) do
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "auction_batch_id"
-    t.index ["auction_batch_id"], name: "index_auction_items_on_auction_batch_id"
+    t.integer "batch_id"
     t.index ["auction_item_category_id"], name: "index_auction_items_on_auction_item_category_id"
+    t.index ["batch_id"], name: "index_auction_items_on_batch_id"
   end
 
   create_table "auction_question_replies", force: :cascade do |t|
@@ -88,20 +75,33 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_220210) do
     t.string "question"
     t.integer "status", default: 0
     t.integer "user_id", null: false
-    t.integer "auction_batch_id", null: false
+    t.integer "batch_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["auction_batch_id"], name: "index_auction_questions_on_auction_batch_id"
+    t.index ["batch_id"], name: "index_auction_questions_on_batch_id"
     t.index ["user_id"], name: "index_auction_questions_on_user_id"
+  end
+
+  create_table "batches", force: :cascade do |t|
+    t.string "code"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer "minimum_bid_amount"
+    t.integer "minimum_bid_difference"
+    t.integer "status", default: 0
+    t.integer "approved_by_user_id"
+    t.integer "created_by_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "bids", force: :cascade do |t|
     t.integer "value"
-    t.integer "auction_batch_id", null: false
+    t.integer "batch_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["auction_batch_id"], name: "index_bids_on_auction_batch_id"
+    t.index ["batch_id"], name: "index_bids_on_batch_id"
     t.index ["user_id"], name: "index_bids_on_user_id"
   end
 
@@ -113,10 +113,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_220210) do
 
   create_table "user_fav_batches", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "auction_batch_id", null: false
+    t.integer "batch_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["auction_batch_id"], name: "index_user_fav_batches_on_auction_batch_id"
+    t.index ["batch_id"], name: "index_user_fav_batches_on_batch_id"
     t.index ["user_id"], name: "index_user_fav_batches_on_user_id"
   end
 
@@ -136,26 +136,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_220210) do
   end
 
   create_table "won_auction_batches", force: :cascade do |t|
-    t.integer "auction_batch_id", null: false
+    t.integer "batch_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["auction_batch_id"], name: "index_won_auction_batches_on_auction_batch_id"
+    t.index ["batch_id"], name: "index_won_auction_batches_on_batch_id"
     t.index ["user_id"], name: "index_won_auction_batches_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "auction_items", "auction_batches"
   add_foreign_key "auction_items", "auction_item_categories"
+  add_foreign_key "auction_items", "batches"
   add_foreign_key "auction_question_replies", "auction_questions"
   add_foreign_key "auction_question_replies", "users"
-  add_foreign_key "auction_questions", "auction_batches"
+  add_foreign_key "auction_questions", "batches"
   add_foreign_key "auction_questions", "users"
-  add_foreign_key "bids", "auction_batches"
+  add_foreign_key "bids", "batches"
   add_foreign_key "bids", "users"
-  add_foreign_key "user_fav_batches", "auction_batches"
+  add_foreign_key "user_fav_batches", "batches"
   add_foreign_key "user_fav_batches", "users"
-  add_foreign_key "won_auction_batches", "auction_batches"
+  add_foreign_key "won_auction_batches", "batches"
   add_foreign_key "won_auction_batches", "users"
 end

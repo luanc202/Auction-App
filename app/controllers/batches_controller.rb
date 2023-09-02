@@ -1,33 +1,33 @@
-class AuctionBatchesController < ApplicationController
+class BatchesController < ApplicationController
   before_action :authenticate_user!, except: %i[index show search]
   before_action :allow_if_admin, except: %i[index show won search]
   before_action :set_auction_batch, only: %i[show edit update approved add_item add_item_save]
 
   def index
     @auction_batches = if current_user && current_user.admin?
-                         AuctionBatch.where('end_date > ?', Time.current)
+                         Batch.where('end_date > ?', Time.current)
                        else
-                         AuctionBatch.where('end_date > ?', Time.current).where(status: :approved)
+                         Batch.where('end_date > ?', Time.current).where(status: :approved)
                        end
   end
 
   def show
-    @auction_batch = AuctionBatch.find(params[:id])
+    @auction_batch = Batch.find(params[:id])
     @questions = if user_signed_in? && current_user.admin?
-                   AuctionQuestion.where(auction_batch_id: @auction_batch.id)
+                   AuctionQuestion.where(batch_id: @auction_batch.id)
                  else
-                   AuctionQuestion.where(auction_batch_id: @auction_batch.id, status: :display)
+                   AuctionQuestion.where(batch_id: @auction_batch.id, status: :display)
                  end
   end
 
   def new
-    @auction_batch = AuctionBatch.new
+    @auction_batch = Batch.new
   end
 
   def create
     auction_batch_params = params.require(:auction_batch).permit(:code, :start_date, :end_date, :minimum_bid_amount,
                                                                  :minimum_bid_difference)
-    @auction_batch = AuctionBatch.new(auction_batch_params)
+    @auction_batch = Batch.new(auction_batch_params)
     @auction_batch.created_by_user = current_user
     if @auction_batch.save
       redirect_to @auction_batch
@@ -44,7 +44,7 @@ class AuctionBatchesController < ApplicationController
   end
 
   def add_item
-    @auction_items = AuctionItem.where(auction_batch_id: nil)
+    @auction_items = AuctionItem.where(batch_id: nil)
   end
 
   def add_item_save
@@ -59,38 +59,38 @@ class AuctionBatchesController < ApplicationController
   end
 
   def expired
-    @auction_batches = AuctionBatch.where('end_date < ?', Time.current)
+    @auction_batches = Batch.where('end_date < ?', Time.current)
   end
 
   def finished
-    @auction_batch = AuctionBatch.find(params[:id])
+    @auction_batch = Batch.find(params[:id])
     @auction_batch.finished!
-    won_auction_batch = WonAuctionBatch.new(auction_batch: @auction_batch, user: @auction_batch.bids.last.user)
+    won_auction_batch = WonBatch.new(auction_batch: @auction_batch, user: @auction_batch.bids.last.user)
     if won_auction_batch.save
-      redirect_to expired_auction_batches_path, notice: 'Lote finalizado com sucesso.'
+      redirect_to expired_batches_path, notice: 'Lote finalizado com sucesso.'
     else
-      redirect_to expired_auction_batches_path, notice: 'Não foi possível finalizar o Lote.'
+      redirect_to expired_batches_path, notice: 'Não foi possível finalizar o Lote.'
     end
   end
 
   def cancelled
-    @auction_batch = AuctionBatch.find(params[:id])
+    @auction_batch = Batch.find(params[:id])
     @auction_batch.cancelled!
     @auction_batch.auction_items.each do |auction_item|
       auction_item.auction_batch = nil
       auction_item.save
     end
-    redirect_to expired_auction_batches_path, notice: 'Lote cancelado com sucesso.'
+    redirect_to expired_batches_path, notice: 'Lote cancelado com sucesso.'
   end
 
   def won
-    auctions = current_user.won_auction_batch.map(&:auction_batch_id)
-    @auction_batches = AuctionBatch.where(id: auctions)
+    auctions = current_user.won_auction_batch.map(&:batch_id)
+    @auction_batches = Batch.where(id: auctions)
   end
 
   def search
     @search = params[:query]
-    @auction_batches = AuctionBatch.where('code LIKE ?', "%#{params[:query]}%").where('end_date > ?',
+    @auction_batches = Batch.where('code LIKE ?', "%#{params[:query]}%").where('end_date > ?',
                                                                                       Time.current).where(status: :approved)
     @auction_items = AuctionItem.where('name LIKE ?', "%#{params[:query]}%")
   end
@@ -102,6 +102,6 @@ class AuctionBatchesController < ApplicationController
   end
 
   def set_auction_batch
-    @auction_batch = AuctionBatch.find(params[:id])
+    @auction_batch = Batch.find(params[:id])
   end
 end

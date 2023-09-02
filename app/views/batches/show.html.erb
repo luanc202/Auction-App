@@ -1,9 +1,9 @@
 <div class="container-md">
   <h2>Lote <%= @auction_batch.code %></h2>
-  <% if current_user && current_user.user_fav_batch.map(&:auction_batch_id).include?(@auction_batch.id)%>
+  <% if current_user && current_user.user_fav_batch.map(&:batch_id).include?(@auction_batch.id)%>
     <%= button_to 'Remover dos Favoritos', user_fav_batch_path(@auction_batch), method: 'delete', class: 'btn btn-danger' %>
   <% else %>
-    <%= button_to 'Favoritar', user_fav_batches_path, method: 'post', params: { auction_batch_id: @auction_batch.id}, class: 'btn btn-warning' %>
+    <%= button_to 'Favoritar', user_fav_batches_path, method: 'post', params: { batch_id: @auction_batch.id}, class: 'btn btn-warning' %>
   <% end %>
 </div>
 <section>
@@ -60,7 +60,7 @@
         <%= form_with(url: auction_questions_path(@auction_batch.id), method: 'post' ) do |f| %>
           <%= f.label :question, 'Pergunta' %>
           <%= f.text_area :question %>
-          <%= hidden_field_tag :auction_batch_id, @auction_batch.id %>
+          <%= hidden_field_tag :batch_id, @auction_batch.id %>
           <%= f.submit 'Enviar' %>
         <% end %>
       <% end %>

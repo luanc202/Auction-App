@@ -10,13 +10,13 @@ auction_item_category = AuctionItemCategory.create!(name: 'Eletrônicos')
 second_auction_item_category = AuctionItemCategory.create!(name: 'Móveis')
 
 travel_to 5.days.ago
-auction_batch = AuctionBatch.create!(code: 'A4K1L9', start_date: 2.hours.from_now, end_date: 14.days.from_now, minimum_bid_amount: 201,
+auction_batch = Batch.create!(code: 'A4K1L9', start_date: 2.hours.from_now, end_date: 14.days.from_now, minimum_bid_amount: 201,
                                      minimum_bid_difference: 10, created_by_user_id: user.id)
 auction_batch.approved!
-second_batch = AuctionBatch.create!(code: '2GWD34', start_date: 4.hours.from_now, end_date: 12.days.from_now, minimum_bid_amount: 505,
+second_batch = Batch.create!(code: '2GWD34', start_date: 4.hours.from_now, end_date: 12.days.from_now, minimum_bid_amount: 505,
                                     minimum_bid_difference: 10, created_by_user_id: user.id)
 second_batch.approved!
-third_batch = AuctionBatch.create!(code: 'J3EQ97', start_date: 6.hours.from_now, end_date: 15.days.from_now, minimum_bid_amount: 700,
+third_batch = Batch.create!(code: 'J3EQ97', start_date: 6.hours.from_now, end_date: 15.days.from_now, minimum_bid_amount: 700,
                                    minimum_bid_difference: 10, created_by_user_id: user.id)
 travel_back
 

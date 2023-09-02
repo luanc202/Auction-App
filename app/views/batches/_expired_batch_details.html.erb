@@ -1,21 +1,21 @@
 <%= content_tag :div, id: dom_id(auction_batch) do %>
   <div class="container-md">
     <dl>
-      <dt><%= AuctionBatch.human_attribute_name(:code) %>:</dt>
+      <dt><%= Batch.human_attribute_name(:code) %>:</dt>
       <dd><%= auction_batch.code %></dd>
       <dt>Quantidade de itens:</dt>
       <dd><%= auction_batch.auction_items.count %></dd>
-      <dt><%= AuctionBatch.human_attribute_name(:start_date) %>:</dt>
+      <dt><%= Batch.human_attribute_name(:start_date) %>:</dt>
       <dd><%= I18n.l(auction_batch.start_date, format: :short)%></dd>
-      <dt><%= AuctionBatch.human_attribute_name(:end_date) %>:</dt>
+      <dt><%= Batch.human_attribute_name(:end_date) %>:</dt>
       <dd><%= I18n.l(auction_batch.end_date, format: :short)%></dd>
-      <dt><%= AuctionBatch.human_attribute_name(:status) %>:</dt>
+      <dt><%= Batch.human_attribute_name(:status) %>:</dt>
       <dd><%= I18n.t(auction_batch.status) %></dd>
       <% if auction_batch.approved_by_user.present? %>
-        <dt><%= AuctionBatch.human_attribute_name(:approved_by_user) %>:</dt>
+        <dt><%= Batch.human_attribute_name(:approved_by_user) %>:</dt>
         <dd><%= auction_batch.approved_by_user.name %></dd>
       <%end%>
-      <dt><%= AuctionBatch.human_attribute_name(:created_by_user) %>:</dt>
+      <dt><%= Batch.human_attribute_name(:created_by_user) %>:</dt>
       <dd><%= auction_batch.created_by_user.name %></dd>
     </dl>
 

@@ -5,11 +5,11 @@ pt-BR:
   cancelled: 'Cancelado'
   activerecord:
     models:
-      auction_batch:
+      batch:
         one: 'Lote para Leilão'
         other: 'Lotes para Leilão'
     attributes:
-      auction_batch:
+      batch:
         code: 'Código'
         start_date: 'Data de início'
         end_date: 'Data de término'

@@ -1,9 +1,9 @@
 
 <div class="container-md">
 <h1 class="h1">Lotes para Leilão</h1>
-  <%= link_to 'Cadastrar Novo Lote', new_auction_batch_path, class: 'btn btn-primary'%>
+  <%= link_to 'Cadastrar Novo Lote', new_batch_path, class: 'btn btn-primary'%>
   <% if current_user && current_user.admin?%>
-    <%= link_to 'Lotes Expirados', expired_auction_batches_path, class: 'btn btn-outline-primary' %>
+    <%= link_to 'Lotes Expirados', expired_batches_path, class: 'btn btn-outline-primary' %>
   <%end%>
 </div>
 

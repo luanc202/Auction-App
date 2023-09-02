@@ -1,4 +1,4 @@
 class UserFavBatch < ApplicationRecord
   belongs_to :user
-  belongs_to :auction_batch
+  belongs_to :batch
 end

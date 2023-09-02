@@ -6,7 +6,7 @@
       <dl>
         <dt>Quantidade de itens:</dt>
         <dd><%= auction_batch.auction_items.count %></dd>
-        <dt><%= AuctionBatch.human_attribute_name(:end_date) %>:</dt>
+        <dt><%= Batch.human_attribute_name(:end_date) %>:</dt>
         <dd><%= I18n.l(auction_batch.end_date, format: :short)%></dd>
         <dt>Valor final:</dt>
         <dd>R$<%= auction_batch.bids.last.value %>,00</dd>

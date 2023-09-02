@@ -6,7 +6,7 @@ describe 'Usuário atualiza Lote para Leilão' do
     user_batch_creator = User.create!(email: 'carlos@leilaodogalpao.com.br', password: '@#$GBRD', name: 'Carlos',
                                       cpf: '91329716051')
     auction_item_category = AuctionItemCategory.create!(name: 'Eletrônicos')
-    auction_batch = AuctionBatch.create!(code: 'A4K1L9', start_date: 2.hours.from_now, end_date: 5.days.from_now, minimum_bid_amount: 100,
+    auction_batch = Batch.create!(code: 'A4K1L9', start_date: 2.hours.from_now, end_date: 5.days.from_now, minimum_bid_amount: 100,
                                          minimum_bid_difference: 10, created_by_user: user_batch_creator)
     auction_item = AuctionItem.create!(name: 'TV Samsung 32', description: 'Samsung Smart TV 32 polegadas HDR LED 4K', weight: 10_000, width: 50,
                                        height: 70, depth: 10, auction_item_category_id: auction_item_category.id, auction_batch_id: auction_batch.id)

@@ -16,8 +16,8 @@
         <%= link_to root_path do %>
           <h1 class="navbar-brand">Leilões de Estoque</h1 >
         <% end %>
-        <%= link_to 'Lotes para Leilão', auction_batches_path %>
-        <%= form_with(url: search_auction_batches_path, method: :get) do |f| %>
+        <%= link_to 'Lotes para Leilão', batches_path %>
+        <%= form_with(url: search_batches_path, method: :get) do |f| %>
             <%= f.label :query, 'Buscar Lotes' %>
             <%= f.text_field :query %>
             <%= f.submit 'Buscar', class: 'btn btn-primary' %>
@@ -32,7 +32,7 @@
               <%= link_to 'CPFs Bloqueados', blocked_cpfs_path %>
             <% end %>
             <% if !current_user.admin? %>
-              <%= link_to 'Leilões Vencidos', won_auction_batches_path %>
+              <%= link_to 'Leilões Vencidos', won_batches_path %>
             <% end %>
           <% else %>
             <%= link_to 'Entrar', new_user_session_path %>
