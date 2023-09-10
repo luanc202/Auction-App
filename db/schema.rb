@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_02_173251) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_10_151957) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -43,22 +43,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_02_173251) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "auction_items", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.integer "weight"
-    t.integer "width"
-    t.integer "height"
-    t.integer "depth"
-    t.integer "auction_item_category_id", null: false
-    t.string "code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "batch_id"
-    t.index ["auction_item_category_id"], name: "index_auction_items_on_auction_item_category_id"
-    t.index ["batch_id"], name: "index_auction_items_on_batch_id"
   end
 
   create_table "auction_question_replies", force: :cascade do |t|
@@ -111,6 +95,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_02_173251) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.integer "weight"
+    t.integer "width"
+    t.integer "height"
+    t.integer "depth"
+    t.integer "auction_item_category_id", null: false
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "batch_id"
+    t.index ["auction_item_category_id"], name: "index_items_on_auction_item_category_id"
+    t.index ["batch_id"], name: "index_items_on_batch_id"
+  end
+
   create_table "user_fav_batches", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "batch_id", null: false
@@ -146,14 +146,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_02_173251) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "auction_items", "auction_item_categories"
-  add_foreign_key "auction_items", "batches"
   add_foreign_key "auction_question_replies", "auction_questions"
   add_foreign_key "auction_question_replies", "users"
   add_foreign_key "auction_questions", "batches"
   add_foreign_key "auction_questions", "users"
   add_foreign_key "bids", "batches"
   add_foreign_key "bids", "users"
+  add_foreign_key "items", "auction_item_categories"
+  add_foreign_key "items", "batches"
   add_foreign_key "user_fav_batches", "batches"
   add_foreign_key "user_fav_batches", "users"
   add_foreign_key "won_auction_batches", "batches"

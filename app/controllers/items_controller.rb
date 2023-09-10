@@ -1,19 +1,23 @@
-class AuctionItemsController < ApplicationController
+class ItemsController < ApplicationController
   before_action :authenticate_user!, :check_if_admin
 
   def index
-      @auction_items = AuctionItem.all
+    @auction_items = Item.all
+  end
+
+  def show
+    @auction_item = Item.find(params[:id])
   end
 
   def new
-    @auction_item = AuctionItem.new
+    @auction_item = Item.new
     @auction_item_categories = AuctionItemCategory.all
   end
 
   def create
-    auction_item_params = params.require(:auction_item).permit(:name, :description, :weight, :width, :height, :depth,
-                                                               :auction_item_category_id, :image)
-    @auction_item = AuctionItem.new(auction_item_params)
+    auction_item_params = params.require(:item).permit(:name, :description, :weight, :width, :height, :depth,
+                                                       :auction_item_category_id, :image)
+    @auction_item = Item.new(auction_item_params)
     if @auction_item.save
       redirect_to @auction_item
     else
@@ -21,10 +25,6 @@ class AuctionItemsController < ApplicationController
       @auction_item_categories = AuctionItemCategory.all
       render :new
     end
-  end
-
-  def show
-    @auction_item = AuctionItem.find(params[:id])
   end
 
   private

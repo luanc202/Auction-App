@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'batches#index'
-  resources :auction_items, only: %i[index new create show]
+  resources :items, only: %i[index new create show]
   resources :auction_questions, only: %i[index]
   resources :blocked_cpfs, only: %i[index new create destroy]
   resources :batches, only: %i[index show new create] do

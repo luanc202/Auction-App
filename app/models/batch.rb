@@ -1,7 +1,7 @@
 class Batch < ApplicationRecord
   belongs_to :created_by_user, class_name: 'User'
   belongs_to :approved_by_user, class_name: 'User', optional: true
-  has_many :auction_items, dependent: :restrict_with_error
+  has_many :items, dependent: :restrict_with_error
   has_many :bids
   has_one :won_auction_batch
   has_many :auction_questions, dependent: :restrict_with_error
@@ -19,13 +19,13 @@ class Batch < ApplicationRecord
   private
 
   def check_start_date
-    return unless start_date.present? && start_date < Time.current + 1.hour
+    return unless start_date.present? && start_date < 1.hour.from_now
 
     errors.add(:start_date, 'deve ser pelo menos 1 hora no futuro')
   end
 
   def check_end_date
-    return unless end_date.present? && start_date.present? && end_date < start_date + 12.hour
+    return unless end_date.present? && start_date.present? && end_date < start_date + 12.hours
 
     errors.add(:end_date, 'deve ser pelo menos 12 horas após a hora de início')
   end

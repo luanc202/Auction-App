@@ -4,8 +4,8 @@ describe 'User vê detalhes de Item para Leilão' do
   it 'a partir da tela inicial Itens para Leilão' do
     user = User.create!(email: 'julia@leilaodogalpao.com.br', password: '@#$GBRD', name: 'Julia', cpf: '04206205086')
     auction_item_category = AuctionItemCategory.create!(name: 'Eletrônicos')
-    auction_item = AuctionItem.create!(name: 'TV Samsung 32', description: 'Samsung Smart TV 32 polegadas HDR LED 4K', weight: 10_000, width: 50,
-                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id)
+    auction_item = Item.create!(name: 'TV Samsung 32', description: 'Samsung Smart TV 32 polegadas HDR LED 4K', weight: 10_000, width: 50,
+                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id)
     auction_item.image.attach(io: File.open('spec/fixtures/tv-imagem.png'), filename: 'tv-imagem.png',
                               content_type: 'image/png')
 
@@ -31,8 +31,8 @@ describe 'User vê detalhes de Item para Leilão' do
   it 'e volta para a tela de Itens para Leilão' do
     user = User.create!(email: 'julia@leilaodogalpao.com.br', password: '@#$GBRD', name: 'Julia', cpf: '04206205086')
     auction_item_category = AuctionItemCategory.create!(name: 'Eletrônicos')
-    auction_item = AuctionItem.create!(name: 'TV Samsung 32', description: 'Samsung Smart TV 32 polegadas HDR LED 4K', weight: 10_000, width: 50,
-                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id)
+    auction_item = Item.create!(name: 'TV Samsung 32', description: 'Samsung Smart TV 32 polegadas HDR LED 4K', weight: 10_000, width: 50,
+                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id)
     auction_item.image.attach(io: File.open('spec/fixtures/tv-imagem.png'), filename: 'tv-imagem.png',
                               content_type: 'image/png')
 
@@ -44,6 +44,6 @@ describe 'User vê detalhes de Item para Leilão' do
     click_on 'TV Samsung 32'
     click_on 'Voltar'
 
-    expect(current_path).to eq auction_items_path
+    expect(current_path).to eq items_path
   end
 end
