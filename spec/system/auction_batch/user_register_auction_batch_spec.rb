@@ -21,8 +21,8 @@ describe 'Admin cadastra Lote para Leilão' do
 
     expect(page).to have_content('2KL54G')
     expect(page).to have_content('Quantidade de itens: 0')
-    expect(page).to have_content('Data de início: ' + I18n.l(start_date, format: :short))
-    expect(page).to have_content('Data de término: ' + I18n.l(end_date, format: :short))
+    expect(page).to have_content("Data de início: #{I18n.l(start_date, format: :short)}")
+    expect(page).to have_content("Data de término: #{I18n.l(end_date, format: :short)}")
     expect(page).to have_content('Lance inicial: R$ 75,00')
     expect(page).to have_content('Menor diferença entre lances: R$ 10,00')
     expect(page).to have_content('Criado por: Julia')

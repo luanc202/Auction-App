@@ -50,7 +50,7 @@ class User < ApplicationRecord
     10.times { |i| sum += cpf[i].to_i * (11 - i) }
     digit2 = (sum * 10 % 11) % 10
 
-    return if cpf[-2..-1] == "#{digit1}#{digit2}"
+    return if cpf[-2..] == "#{digit1}#{digit2}"
 
     errors.add(:cpf, 'deve ser válido')
     nil

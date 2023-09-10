@@ -19,13 +19,13 @@ class Batch < ApplicationRecord
   private
 
   def check_start_date
-    return unless start_date.present? && start_date < Time.current + 1.hour
+    return unless start_date.present? && start_date < 1.hour.from_now
 
     errors.add(:start_date, 'deve ser pelo menos 1 hora no futuro')
   end
 
   def check_end_date
-    return unless end_date.present? && start_date.present? && end_date < start_date + 12.hour
+    return unless end_date.present? && start_date.present? && end_date < start_date + 12.hours
 
     errors.add(:end_date, 'deve ser pelo menos 12 horas após a hora de início')
   end

@@ -4,9 +4,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem "rails", "~> 7.0.4", ">= 7.0.4.3"
+gem 'rails', '~> 7.0.4', '>= 7.0.4.3'
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem "sprockets-rails"
+gem 'sprockets-rails'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
@@ -16,18 +16,20 @@ gem 'sass-rails', '>= 6'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem "devise"
-gem "image_processing"
-gem "activesupport", "~> 7.0.7.1"
-gem "actionpack", ">= 7.0.5.1"
+gem 'actionpack', '>= 7.0.5.1'
+gem 'activesupport', '~> 7.0.7.1'
+gem 'devise'
+gem 'image_processing'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
-  gem "rspec-rails"
-  gem "capybara"
+  gem 'capybara'
+  gem 'debug', platforms: %i[mri mingw x64_mingw]
+  gem 'rspec-rails'
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
   gem 'simplecov', require: false
 end
 
@@ -36,6 +38,6 @@ group :development do
   # gem "spring"
 end
 
-gem "ruby-vips", "~> 2.1"
+gem 'ruby-vips', '~> 2.1'
 
-gem "cssbundling-rails", "~> 1.1"
+gem 'cssbundling-rails', '~> 1.1'

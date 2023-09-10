@@ -4,7 +4,7 @@ class BatchesController < ApplicationController
   before_action :set_auction_batch, only: %i[show edit update approved add_item add_item_save]
 
   def index
-    @auction_batches = if current_user && current_user.admin?
+    @auction_batches = if current_user&.admin?
                          Batch.where('end_date > ?', Time.current)
                        else
                          Batch.where('end_date > ?', Time.current).where(status: :approved)
@@ -26,7 +26,7 @@ class BatchesController < ApplicationController
 
   def create
     auction_batch_params = params.require(:batch).permit(:code, :start_date, :end_date, :minimum_bid_amount,
-                                                                 :minimum_bid_difference)
+                                                         :minimum_bid_difference)
     @auction_batch = Batch.new(auction_batch_params)
     @auction_batch.created_by_user = current_user
     if @auction_batch.save
@@ -91,7 +91,7 @@ class BatchesController < ApplicationController
   def search
     @search = params[:query]
     @auction_batches = Batch.where('code LIKE ?', "%#{params[:query]}%").where('end_date > ?',
-                                                                                      Time.current).where(status: :approved)
+                                                                               Time.current).where(status: :approved)
     @auction_items = Item.where('name LIKE ?', "%#{params[:query]}%")
   end
 

@@ -1,6 +1,10 @@
 class AuctionQuestionRepliesController < ApplicationController
   before_action :authenticate_user!, :check_if_admin
 
+  def index
+    @auction_questions = AuctionQuestion.where.missing(:auction_question_reply)
+  end
+
   def create
     reply_params = params.permit(:reply, :auction_question_id)
     reply = AuctionQuestionReply.new(reply: reply_params[:reply], auction_question_id: reply_params[:auction_question_id],
@@ -11,10 +15,6 @@ class AuctionQuestionRepliesController < ApplicationController
       flash[:notice] = 'Não foi possível enviar a Pergunta.'
       redirect_to auction_question_replies_path
     end
-  end
-
-  def index
-    @auction_questions = AuctionQuestion.left_outer_joins(:auction_question_reply).where(auction_question_reply: { id: nil })
   end
 
   private

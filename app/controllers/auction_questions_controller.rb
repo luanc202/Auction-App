@@ -3,7 +3,7 @@ class AuctionQuestionsController < ApplicationController
   before_action :check_if_admin, except: %i[create]
 
   def index
-    @auction_questions = AuctionQuestion.left_outer_joins(:auction_question_reply).where(auction_question_reply: { id: nil })
+    @auction_questions = AuctionQuestion.where.missing(:auction_question_reply)
   end
 
   def create
