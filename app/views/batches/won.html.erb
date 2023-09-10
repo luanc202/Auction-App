@@ -5,7 +5,7 @@
       <h3>Lote <%= auction_batch.code %></h3>
       <dl>
         <dt>Quantidade de itens:</dt>
-        <dd><%= auction_batch.auction_items.count %></dd>
+        <dd><%= auction_batch.items.count %></dd>
         <dt><%= Batch.human_attribute_name(:end_date) %>:</dt>
         <dd><%= I18n.l(auction_batch.end_date, format: :short)%></dd>
         <dt>Valor final:</dt>
@@ -14,7 +14,7 @@
     </div>
     <div>
       <h3>Itens</h3>
-      <% auction_batch.auction_items.each do |auction_item| %>
+      <% auction_batch.items.each do |auction_item| %>
         <dl>
           <dd><%= image_tag auction_item.image %></dd>
           <dt><%= auction_item.name %></dt>
@@ -23,7 +23,7 @@
           <dd><%= auction_item.auction_item_category.name %></dd>
           <dt>Dimensões:</dt>
           <dd><%= auction_item.width %>cm x <%= auction_item.height %>cm x <%= auction_item.depth %>cm</dd>
-          <dt><%= AuctionItem.human_attribute_name(:weight) %>:</dt>
+          <dt><%= Item.human_attribute_name(:weight) %>:</dt>
           <dd><%= auction_item.weight %>g</dd>
         </dl>
       <% end %>

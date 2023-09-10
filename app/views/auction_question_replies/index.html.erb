@@ -2,10 +2,10 @@
 <section class="container-md">
 <h1>Perguntas não respondidas</h1>
 
-<%= link_to 'Cadastrar Novo', new_auction_item_path, class: 'btn btn-primary' %>
+<%= link_to 'Cadastrar Novo', new_item_path, class: 'btn btn-primary' %>
     <% @auction_questions.each do |auction_question| %>
   <div class="container-md">
-      <h3>Pertence ao lote <%= link_to auction_question.auction_batch.code, auction_question.auction_batch %></h3>
+      <h3>Pertence ao lote <%= link_to auction_question.batch.code, auction_question.batch %></h3>
       <dl>
         <dt>Pergunta:</dt>
         <dd><%= auction_question.question %></dd>

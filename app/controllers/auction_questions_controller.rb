@@ -12,7 +12,7 @@ class AuctionQuestionsController < ApplicationController
     auction_question = AuctionQuestion.new(question: auction_question_params[:question], batch:,
                                            user: current_user)
     if auction_question.save
-      redirect_to atch_path(auction_question.batch)
+      redirect_to batch_path(auction_question.batch)
     else
       flash[:notice] = 'Não foi possível enviar a Pergunta.'
       redirect_to atch_path(auction_question.batch)

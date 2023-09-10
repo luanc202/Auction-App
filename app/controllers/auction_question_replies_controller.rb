@@ -6,7 +6,7 @@ class AuctionQuestionRepliesController < ApplicationController
     reply = AuctionQuestionReply.new(reply: reply_params[:reply], auction_question_id: reply_params[:auction_question_id],
                                      user: current_user)
     if reply.save
-      redirect_to auction_batch_path(reply.auction_question.auction_batch)
+      redirect_to batch_path(reply.auction_question.batch)
     else
       flash[:notice] = 'Não foi possível enviar a Pergunta.'
       redirect_to auction_question_replies_path

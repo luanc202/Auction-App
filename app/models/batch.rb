@@ -1,7 +1,7 @@
 class Batch < ApplicationRecord
   belongs_to :created_by_user, class_name: 'User'
   belongs_to :approved_by_user, class_name: 'User', optional: true
-  has_many :auction_items, dependent: :restrict_with_error
+  has_many :items, dependent: :restrict_with_error
   has_many :bids
   has_one :won_auction_batch
   has_many :auction_questions, dependent: :restrict_with_error

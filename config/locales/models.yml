@@ -1,11 +1,11 @@
 pt-BR:
   activerecord:
     models:
-      auction_item: 'Item de Leilão'
+      item: 'Item de Leilão'
       auction_item_category: 'Categoria'
       auction_batch: 'Lote para Leilão'
     attributes:
-      auction_item:
+      item:
         name: 'Nome'
         weight: 'Peso'
         height: 'Altura'

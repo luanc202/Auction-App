@@ -4,7 +4,7 @@
       <dt><%= Batch.human_attribute_name(:code) %>:</dt>
       <dd><%= auction_batch.code %></dd>
       <dt>Quantidade de itens:</dt>
-      <dd><%= auction_batch.auction_items.count %></dd>
+      <dd><%= auction_batch.items.count %></dd>
       <dt><%= Batch.human_attribute_name(:start_date) %>:</dt>
       <dd><%= I18n.l(auction_batch.start_date, format: :short)%></dd>
       <dt><%= Batch.human_attribute_name(:end_date) %>:</dt>
@@ -21,9 +21,9 @@
 
     <div>
       <% if auction_batch.bids.empty? && auction_batch.pending?%>
-        <%= button_to 'Cancelar Lote', cancelled_auction_batch_path(auction_batch.id), class: 'btn btn-danger'%>
+        <%= button_to 'Cancelar Lote', cancelled_batch_path(auction_batch.id), class: 'btn btn-danger'%>
       <%elsif !auction_batch.cancelled?%>
-        <%= button_to 'Finalizar Lote', finished_auction_batch_path(auction_batch.id), class: 'btn btn-primary'%>
+        <%= button_to 'Finalizar Lote', finished_batch_path(auction_batch.id), class: 'btn btn-primary'%>
       <%end%>
     </div>
   </div>

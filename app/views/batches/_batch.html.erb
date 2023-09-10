@@ -3,7 +3,7 @@
   <h3>Preço Atual: R$ <%= batch.bids.empty? ? batch.minimum_bid_amount : batch.bids.last.value + batch.minimum_bid_difference %></h3>
   <dl>
     <dt>Quantidade de itens:</dt>
-    <dd><%= batch.auction_items.count %></dd>
+    <dd><%= batch.items.count %></dd>
     <dt><%= Batch.human_attribute_name(:start_date) %>:</dt>
     <dd><%= I18n.l(batch.start_date, format: :short)%></dd>
     <dt><%= Batch.human_attribute_name(:end_date) %>:</dt>

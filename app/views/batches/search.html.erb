@@ -8,7 +8,7 @@
   </div>
 
   <div class="container-md">
-    <p><%= @auction_items.count %> <%= AuctionItem.model_name.human(count: @auction_items.count).downcase %> <%= t(:found, count: @auction_items.count) %></p>
+    <p><%= @auction_items.count %> <%= Item.model_name.human(count: @auction_items.count).downcase %> <%= t(:found, count: @auction_items.count) %></p>
       <ul class="list-group">
     <% @auction_items.each do |auction_item| %>
         <li class="list-group-item">
@@ -16,7 +16,7 @@
             <dt>Item:</dt>
             <dd><%= auction_item.name %></dd>
             <dt>Lote:</dt>
-            <dd><%= link_to auction_item.auction_batch.code, auction_item.auction_batch %></dd>
+            <dd><%= link_to auction_item.batch.code, auction_item.batch %></dd>
           </dl>
         </li>
     <% end %>

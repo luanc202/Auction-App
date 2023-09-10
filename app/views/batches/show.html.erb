@@ -12,7 +12,7 @@
     
     <div>
     <% if (!current_user || !current_user.admin?) && @auction_batch.end_date > Time.current  && @auction_batch.start_date < Time.current%>
-      <%= form_with(url: auction_batch_bids_path(@auction_batch.id), method: 'post' ) do |f| %>
+      <%= form_with(url: batch_bids_path(@auction_batch.id), method: 'post' ) do |f| %>
         <%= f.label :value, 'Valor do Lance' %>
         <%= f.number_field :value %>
         <%= f.submit 'Fazer lance' %>
@@ -22,11 +22,11 @@
   </div>
   <div class="container-md">
   <% if @auction_batch.pending? %>
-  <%= link_to 'Adicionar Novo Item', add_item_auction_batch_path(@auction_batch.id)%>
+  <%= link_to 'Adicionar Novo Item', add_item_batch_path(@auction_batch.id)%>
   <%end%>
     <%= render 'auction_batch_details' %>
     <% if @auction_batch.pending? && current_user != @auction_batch.created_by_user && current_user.admin? %>
-      <%= button_to 'Aprovar Lote', approved_auction_batch_path(@auction_batch.id), class: 'btn btn-primary' %>
+      <%= button_to 'Aprovar Lote', approved_batch_path(@auction_batch.id), class: 'btn btn-primary' %>
     <% end %>
   </div>
   <div class="container-md">
@@ -68,12 +68,12 @@
   </div>
 </section>
 
-<% if !@auction_batch.auction_items.empty?%>
+<% if !@auction_batch.items.empty?%>
 <div class="container-md">
   <section>
     <h3>Itens do Lote</h3>
     <dl>
-      <% @auction_batch.auction_items.each do |ai|  %>
+      <% @auction_batch.items.each do |ai|  %>
       <dt><%= link_to ai.name, ai  %></dt>
       <dd><%= ai.description %></dd>
       <%end%>

@@ -1,7 +1,7 @@
 <div class="container-md">
   <dl>
     <dt>Quantidade de itens:</dt>
-    <dd><%= @auction_batch.auction_items.count %></dd>
+    <dd><%= @auction_batch.items.count %></dd>
     <dt><%= Batch.human_attribute_name(:start_date) %>:</dt>
     <dd><%= I18n.l(@auction_batch.start_date, format: :short)%></dd>
     <dt><%= Batch.human_attribute_name(:end_date) %>:</dt>

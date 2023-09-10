@@ -6,8 +6,8 @@ describe 'User vê lote para leilão' do
     auction_item_category = AuctionItemCategory.create!(name: 'Eletrônicos')
     auction_batch = Batch.create!(code: 'A4K1L9', start_date: 2.hours.from_now, end_date: 5.days.from_now, minimum_bid_amount: 100,
                                          minimum_bid_difference: 10, created_by_user_id: user.id)
-    auction_item = AuctionItem.create!(name: 'TV Samsung 32', description: 'Samsung Smart TV 32 polegadas HDR LED 4K', weight: 10_000, width: 50,
-                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, auction_batch_id: auction_batch.id)
+    auction_item = Item.create!(name: 'TV Samsung 32', description: 'Samsung Smart TV 32 polegadas HDR LED 4K', weight: 10_000, width: 50,
+                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)
     auction_item.image.attach(io: File.open('spec/fixtures/tv-imagem.png'), filename: 'tv-imagem.png',
                               content_type: 'image/png')
     auction_batch.approved!
@@ -34,10 +34,10 @@ describe 'User vê lote para leilão' do
                                                 minimum_bid_difference: 10, created_by_user_id: user.id)
     second_auction_batch.approved!
     travel_back
-    auction_item = AuctionItem.create!(name: 'TV Samsung 32', description: 'Samsung Smart TV 32 polegadas HDR LED 4K', weight: 10_000, width: 50,
-                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, auction_batch_id: auction_batch.id)
-    second_auction_item = AuctionItem.create!(name: 'TV Philips 40', description: 'Philips TV Smart 40 polegadas HDR OLED 8K', weight: 12_000, width: 60,
-                                              height: 90, depth: 10, auction_item_category_id: auction_item_category.id, auction_batch_id: second_auction_batch.id)
+    auction_item = Item.create!(name: 'TV Samsung 32', description: 'Samsung Smart TV 32 polegadas HDR LED 4K', weight: 10_000, width: 50,
+                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)
+    second_auction_item = Item.create!(name: 'TV Philips 40', description: 'Philips TV Smart 40 polegadas HDR OLED 8K', weight: 12_000, width: 60,
+                                              height: 90, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: second_auction_batch.id)
     auction_item.image.attach(io: File.open('spec/fixtures/tv-imagem.png'), filename: 'tv-imagem.png',
                               content_type: 'image/png')
     second_auction_item.image.attach(io: File.open('spec/fixtures/tv-imagem.png'), filename: 'tv-imagem.png',
@@ -70,8 +70,8 @@ describe 'User vê lote para leilão' do
     auction_item_category = AuctionItemCategory.create!(name: 'Eletrônicos')
     auction_batch = Batch.create!(code: 'A4K1L9', start_date: 2.hours.from_now, end_date: 5.days.from_now, minimum_bid_amount: 100,
                                          minimum_bid_difference: 10, created_by_user_id: user.id)
-    auction_item = AuctionItem.create!(name: 'TV Samsung 32', description: 'Samsung Smart TV 32 polegadas HDR LED 4K', weight: 10_000, width: 50,
-                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, auction_batch_id: auction_batch.id)
+    auction_item = Item.create!(name: 'TV Samsung 32', description: 'Samsung Smart TV 32 polegadas HDR LED 4K', weight: 10_000, width: 50,
+                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)
     auction_item.image.attach(io: File.open('spec/fixtures/tv-imagem.png'), filename: 'tv-imagem.png',
                               content_type: 'image/png')
 

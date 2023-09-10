@@ -3,13 +3,13 @@ class BidsController < ApplicationController
   before_action :is_user_logged
 
   def create
-    bid_params = params.permit(:auction_batch_id, :value)
+    bid_params = params.permit(:batch_id, :value)
     bid = Bid.new(bid_params)
     bid.user_id = current_user.id
     if bid.save
-      redirect_to bid.auction_batch, notice: 'Lance dado com sucesso!'
+      redirect_to bid.batch, notice: 'Lance dado com sucesso!'
     else
-      redirect_to auction_batch_path(bid.auction_batch), alert: 'Não foi possível realizar o lance.'
+      redirect_to batch_path(bid.batch), alert: 'Não foi possível realizar o lance.'
     end
   end
 
