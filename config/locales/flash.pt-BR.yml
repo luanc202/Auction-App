@@ -1,0 +1,3 @@
+pt-BR:
+  access_denied: 'Acesso não autorizado.'
+  prevent_logged_out_visitor: 'Faça login para acessar'
