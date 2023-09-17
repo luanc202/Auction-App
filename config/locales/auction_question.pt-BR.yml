@@ -10,3 +10,7 @@ pt-BR:
       auction_question:
         question: 'Pergunta'
         status: 'Status'
+  auction_question:
+    create:
+      success: 'Pergunta enviada com sucesso'
+      error: 'Não foi possível enviar a Pergunta.'

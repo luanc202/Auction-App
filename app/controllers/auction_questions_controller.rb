@@ -7,15 +7,12 @@ class AuctionQuestionsController < ApplicationController
   end
 
   def create
-    auction_question_params = params.permit(:question, :batch_id)
-    batch = Batch.find(auction_question_params[:batch_id])
-    auction_question = AuctionQuestion.new(question: auction_question_params[:question], batch:,
-                                           user: current_user)
+    auction_question = AuctionQuestion.new(question_params)
     if auction_question.save
-      redirect_to batch_path(auction_question.batch)
+      redirect_to batch_path(auction_question.batch), notice: t('.create.success')
     else
-      flash[:notice] = 'Não foi possível enviar a Pergunta.'
-      redirect_to atch_path(auction_question.batch)
+      flash[:notice] = t('.create.error')
+      redirect_to batch_path(auction_question.batch)
     end
   end
 
@@ -36,6 +33,11 @@ class AuctionQuestionsController < ApplicationController
   private
 
   def check_if_admin
-    redirect_to root_path, notice: 'Acesso não autorizado.' unless current_user.admin?
+    redirect_to root_path, notice: t('access_denied') unless current_user.admin?
+  end
+
+  def question_params
+    batch = Batch.find(params[:batch_id])
+    params.permit(:question, :batch_id).merge(user: current_user).merge(batch:)
   end
 end

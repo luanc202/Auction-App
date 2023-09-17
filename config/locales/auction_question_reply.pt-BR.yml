@@ -7,4 +7,4 @@ pt-BR:
   auction_question_replies:
     create:
       success:
-      error: 'Não foi possível enviar a Pergunta.'
+      error: 'Não foi possível enviar a Resposta.'
