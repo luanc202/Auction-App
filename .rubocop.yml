@@ -42,6 +42,10 @@ Style/FrozenStringLiteralComment:
 Metrics/BlockLength:
   AllowedMethods: ['describe', 'context', 'feature', 'scenario', 'let', 'it', 'xit']
 
+Layout/LineLength:
+  Exclude:
+    - 'spec/**/*'
+
 Layout/EndOfLine:
   Enabled: True
   
