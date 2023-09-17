@@ -1,0 +1,6 @@
+pt-BR:
+  activerecord:
+    models:
+      auction_question_reply:
+        one: 'Resposta'
+        other: 'Respostas'
