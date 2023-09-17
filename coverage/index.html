@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2023-09-10T15:29:36-03:00">2023-09-10T15:29:36-03:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2023-09-16T21:29:48-03:00">2023-09-16T21:29:48-03:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -744,7 +744,7 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#b55b64a233fb637f674cbd526381fb007bf6eed3" class="src_link" title="spec/system/auction_item/user_view_auction_items_page_spec.rb">spec/system/auction_item/user_view_auction_items_page_spec.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">69</td>
+            <td class="cell--number">70</td>
             <td class="cell--number">45</td>
             <td class="cell--number">45</td>
             <td class="cell--number">0</td>
@@ -766,7 +766,7 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#f099100ce4c07921180ca71a7ba9b95dbd090d8e" class="src_link" title="spec/system/auction_question/user_update_auction_question_spec.rb">spec/system/auction_question/user_update_auction_question_spec.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
-            <td class="cell--number">55</td>
+            <td class="cell--number">56</td>
             <td class="cell--number">38</td>
             <td class="cell--number">38</td>
             <td class="cell--number">0</td>
@@ -1066,7 +1066,7 @@
 
             
 
-            <code class="ruby">    flash[:alert] = &#39;Sua conta está suspensa.&#39;</code>
+            <code class="ruby">    flash.now[:alert] = t(&#39;blocked_cpf.blocked.message&#39;)</code>
           </li>
         </div>
       
@@ -1207,111 +1207,23 @@
 
             
 
-            <code class="ruby">  def create</code>
+            <code class="ruby">  def index</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="5">
-            <span class="hits">1</span>
+          <li class="covered" data-hits="2" data-linenumber="5">
+            <span class="hits">2</span>
             
 
             
 
-            <code class="ruby">    reply_params = params.permit(:reply, :auction_question_id)</code>
+            <code class="ruby">    @auction_questions = AuctionQuestion.where.missing(:auction_question_reply)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="6">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    reply = AuctionQuestionReply.new(reply: reply_params[:reply], auction_question_id: reply_params[:auction_question_id],</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="7">
-            
-            
-
-            
-
-            <code class="ruby">                                     user: current_user)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="8">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    if reply.save</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="9">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      redirect_to batch_path(reply.auction_question.batch)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="10">
-            
-            
-
-            
-
-            <code class="ruby">    else</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="11">
-            
-            
-
-            
-
-            <code class="ruby">      flash[:notice] = &#39;Não foi possível enviar a Pergunta.&#39;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="12">
-            
-            
-
-            
-
-            <code class="ruby">      redirect_to auction_question_replies_path</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="13">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="14">
+          <li class="never" data-hits="" data-linenumber="6">
             
             
 
@@ -1322,7 +1234,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="15">
+          <li class="never" data-hits="" data-linenumber="7">
             
             
 
@@ -1333,24 +1245,112 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="16">
+          <li class="covered" data-hits="1" data-linenumber="8">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  def index</code>
+            <code class="ruby">  def create</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="17">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="1" data-linenumber="9">
+            <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">    @auction_questions = AuctionQuestion.left_outer_joins(:auction_question_reply).where(auction_question_reply: { id: nil })</code>
+            <code class="ruby">    reply_params = params.permit(:reply, :auction_question_id)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="10">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    reply = AuctionQuestionReply.new(reply: reply_params[:reply], auction_question_id: reply_params[:auction_question_id],</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="11">
+            
+            
+
+            
+
+            <code class="ruby">                                     user: current_user)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="12">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    if reply.save</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="13">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      redirect_to batch_path(reply.auction_question.batch)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="14">
+            
+            
+
+            
+
+            <code class="ruby">    else</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="15">
+            
+            
+
+            
+
+            <code class="ruby">      flash[:notice] = &#39;Não foi possível enviar a Pergunta.&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="16">
+            
+            
+
+            
+
+            <code class="ruby">      redirect_to auction_question_replies_path</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="17">
+            
+            
+
+            
+
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -1535,7 +1535,7 @@
 
             
 
-            <code class="ruby">    @auction_questions = AuctionQuestion.left_outer_joins(:auction_question_reply).where(auction_question_reply: { id: nil })</code>
+            <code class="ruby">    @auction_questions = AuctionQuestion.where.missing(:auction_question_reply)</code>
           </li>
         </div>
       
@@ -2028,7 +2028,7 @@
 
             
 
-            <code class="ruby">    @auction_batches = if current_user &amp;&amp; current_user.admin?</code>
+            <code class="ruby">    @auction_batches = if current_user&amp;.admin?</code>
           </li>
         </div>
       
@@ -2270,7 +2270,7 @@
 
             
 
-            <code class="ruby">                                                                 :minimum_bid_difference)</code>
+            <code class="ruby">                                                         :minimum_bid_difference)</code>
           </li>
         </div>
       
@@ -2985,7 +2985,7 @@
 
             
 
-            <code class="ruby">                                                                                      Time.current).where(status: :approved)</code>
+            <code class="ruby">                                                                               Time.current).where(status: :approved)</code>
           </li>
         </div>
       
@@ -3837,7 +3837,7 @@
 
             
 
-            <code class="ruby">      @auction_items = Item.all</code>
+            <code class="ruby">    @auction_items = Item.all</code>
           </li>
         </div>
       
@@ -3870,29 +3870,29 @@
 
             
 
-            <code class="ruby">  def new</code>
+            <code class="ruby">  def show</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="9">
-            <span class="hits">2</span>
+          <li class="covered" data-hits="3" data-linenumber="9">
+            <span class="hits">3</span>
             
 
             
 
-            <code class="ruby">    @auction_item = Item.new</code>
+            <code class="ruby">    @auction_item = Item.find(params[:id])</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="2" data-linenumber="10">
-            <span class="hits">2</span>
+          <li class="never" data-hits="" data-linenumber="10">
+            
             
 
             
 
-            <code class="ruby">    @auction_item_categories = AuctionItemCategory.all</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
@@ -3903,29 +3903,29 @@
 
             
 
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="12">
-            
-            
-
-            
-
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="13">
+          <li class="covered" data-hits="1" data-linenumber="12">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  def create</code>
+            <code class="ruby">  def new</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="13">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">    @auction_item = Item.new</code>
           </li>
         </div>
       
@@ -3936,7 +3936,7 @@
 
             
 
-            <code class="ruby">    auction_item_params = params.require(:item).permit(:name, :description, :weight, :width, :height, :depth,</code>
+            <code class="ruby">    @auction_item_categories = AuctionItemCategory.all</code>
           </li>
         </div>
       
@@ -3947,111 +3947,12 @@
 
             
 
-            <code class="ruby">                                                               :auction_item_category_id, :image)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="16">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">    @auction_item = Item.new(auction_item_params)</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="2" data-linenumber="17">
-            <span class="hits">2</span>
-            
-
-            
-
-            <code class="ruby">    if @auction_item.save</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="18">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      redirect_to @auction_item</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="19">
-            
-            
-
-            
-
-            <code class="ruby">    else</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="20">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      flash.now[:notice] = &#39;Não foi possível cadastrar o Item de Leilão.&#39;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="21">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      @auction_item_categories = AuctionItemCategory.all</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="22">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">      render :new</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="23">
-            
-            
-
-            
-
-            <code class="ruby">    end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="24">
-            
-            
-
-            
-
             <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="25">
+          <li class="never" data-hits="" data-linenumber="16">
             
             
 
@@ -4062,24 +3963,123 @@
         </div>
       
         <div>
+          <li class="covered" data-hits="1" data-linenumber="17">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def create</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="18">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">    auction_item_params = params.require(:item).permit(:name, :description, :weight, :width, :height, :depth,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="19">
+            
+            
+
+            
+
+            <code class="ruby">                                                       :auction_item_category_id, :image)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="20">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">    @auction_item = Item.new(auction_item_params)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="21">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">    if @auction_item.save</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="22">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      redirect_to @auction_item</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="23">
+            
+            
+
+            
+
+            <code class="ruby">    else</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="24">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      flash.now[:notice] = &#39;Não foi possível cadastrar o Item de Leilão.&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="25">
+            <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">      @auction_item_categories = AuctionItemCategory.all</code>
+          </li>
+        </div>
+      
+        <div>
           <li class="covered" data-hits="1" data-linenumber="26">
             <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  def show</code>
+            <code class="ruby">      render :new</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="3" data-linenumber="27">
-            <span class="hits">3</span>
+          <li class="never" data-hits="" data-linenumber="27">
+            
             
 
             
 
-            <code class="ruby">    @auction_item = Item.find(params[:id])</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
@@ -5220,7 +5220,7 @@
 
             
 
-            <code class="ruby">    return unless start_date.present? &amp;&amp; start_date &lt; Time.current + 1.hour</code>
+            <code class="ruby">    return unless start_date.present? &amp;&amp; start_date &lt; 1.hour.from_now</code>
           </li>
         </div>
       
@@ -5286,7 +5286,7 @@
 
             
 
-            <code class="ruby">    return unless end_date.present? &amp;&amp; start_date.present? &amp;&amp; end_date &lt; start_date + 12.hour</code>
+            <code class="ruby">    return unless end_date.present? &amp;&amp; start_date.present? &amp;&amp; end_date &lt; start_date + 12.hours</code>
           </li>
         </div>
       
@@ -5920,7 +5920,7 @@
 
             
 
-            <code class="ruby">    return if cpf[-2..-1] == &quot;#{digit1}#{digit2}&quot;</code>
+            <code class="ruby">    return if cpf[-2..] == &quot;#{digit1}#{digit2}&quot;</code>
           </li>
         </div>
       
@@ -6094,7 +6094,7 @@
 
             
 
-            <code class="ruby">  validates :name, :description, :weight, :width, :height, :depth, :auction_item_category_id, presence: true</code>
+            <code class="ruby">  validates :name, :description, :weight, :width, :height, :depth, presence: true</code>
           </li>
         </div>
       
@@ -6127,7 +6127,7 @@
 
             
 
-            <code class="ruby">  private </code>
+            <code class="ruby">  private</code>
           </li>
         </div>
       
@@ -6796,7 +6796,7 @@
 
             
 
-            <code class="ruby">    return if cpf[-2..-1] == &quot;#{digit1}#{digit2}&quot;</code>
+            <code class="ruby">    return if cpf[-2..] == &quot;#{digit1}#{digit2}&quot;</code>
           </li>
         </div>
       
@@ -15647,7 +15647,7 @@
 
             
 
-            <code class="ruby">                                       minimum_bid_amount: 300, minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                minimum_bid_amount: 300, minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -15768,7 +15768,7 @@
 
             
 
-            <code class="ruby">                                       minimum_bid_amount: 300, minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                minimum_bid_amount: 300, minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -15889,7 +15889,7 @@
 
             
 
-            <code class="ruby">                                       minimum_bid_amount: 300, minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                minimum_bid_amount: 300, minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -16010,7 +16010,7 @@
 
             
 
-            <code class="ruby">                                       minimum_bid_amount: 300, minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                minimum_bid_amount: 300, minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -16131,7 +16131,7 @@
 
             
 
-            <code class="ruby">                                       minimum_bid_amount: &#39;&#39;, minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                minimum_bid_amount: &#39;&#39;, minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -16252,7 +16252,7 @@
 
             
 
-            <code class="ruby">                                       minimum_bid_amount: 300, minimum_bid_difference: &#39;&#39;, created_by_user_id: user.id)</code>
+            <code class="ruby">                                minimum_bid_amount: 300, minimum_bid_difference: &#39;&#39;, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -16373,7 +16373,7 @@
 
             
 
-            <code class="ruby">                                       minimum_bid_amount: 300, minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                minimum_bid_amount: 300, minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -16494,7 +16494,7 @@
 
             
 
-            <code class="ruby">                                       minimum_bid_amount: 300, minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                minimum_bid_amount: 300, minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -16937,7 +16937,7 @@
 
             
 
-            <code class="ruby">      user = User.new(email: &#39;joao@email.com&#39;, password: &#39;171653&#39;, name: &#39;&#39;, cpf: 87646343232)</code>
+            <code class="ruby">      user = User.new(email: &#39;joao@email.com&#39;, password: &#39;171653&#39;, name: &#39;&#39;, cpf: 87_646_343_232)</code>
           </li>
         </div>
       
@@ -17025,7 +17025,7 @@
 
             
 
-            <code class="ruby">      user = User.new(email: &#39;&#39;, password: &#39;171653&#39;, name: &#39;João&#39;, cpf: 87646343232)</code>
+            <code class="ruby">      user = User.new(email: &#39;&#39;, password: &#39;171653&#39;, name: &#39;João&#39;, cpf: 87_646_343_232)</code>
           </li>
         </div>
       
@@ -17113,7 +17113,7 @@
 
             
 
-            <code class="ruby">      user = User.new(email: &#39;joao@email.com&#39;, password: &#39;&#39;, name: &#39;João&#39;, cpf: 87646343232)</code>
+            <code class="ruby">      user = User.new(email: &#39;joao@email.com&#39;, password: &#39;&#39;, name: &#39;João&#39;, cpf: 87_646_343_232)</code>
           </li>
         </div>
       
@@ -17289,7 +17289,7 @@
 
             
 
-            <code class="ruby">      user = User.new(email: &#39;joao@email.com&#39;, password: &#39;171653&#39;, name: &#39;João&#39;, cpf: 11171711111)</code>
+            <code class="ruby">      user = User.new(email: &#39;joao@email.com&#39;, password: &#39;171653&#39;, name: &#39;João&#39;, cpf: 11_171_711_111)</code>
           </li>
         </div>
       
@@ -17311,7 +17311,7 @@
 
             
 
-            <code class="ruby">      result = user.valid?</code>
+            <code class="ruby">      user.valid?</code>
           </li>
         </div>
       
@@ -17388,7 +17388,7 @@
 
             
 
-            <code class="ruby">      user = User.new(email: &#39;joao@email.com&#39;, password: &#39;171653&#39;, name: &#39;João&#39;, cpf: 637734)</code>
+            <code class="ruby">      user = User.new(email: &#39;joao@email.com&#39;, password: &#39;171653&#39;, name: &#39;João&#39;, cpf: 637_734)</code>
           </li>
         </div>
       
@@ -17410,7 +17410,7 @@
 
             
 
-            <code class="ruby">      result = user.valid?</code>
+            <code class="ruby">      user.valid?</code>
           </li>
         </div>
       
@@ -17487,7 +17487,7 @@
 
             
 
-            <code class="ruby">      user = User.new(email: &#39;joao@email.com&#39;, password: &#39;171653&#39;, name: &#39;João&#39;, cpf: 11111111111)</code>
+            <code class="ruby">      user = User.new(email: &#39;joao@email.com&#39;, password: &#39;171653&#39;, name: &#39;João&#39;, cpf: 11_111_111_111)</code>
           </li>
         </div>
       
@@ -17509,7 +17509,7 @@
 
             
 
-            <code class="ruby">      result = user.valid?</code>
+            <code class="ruby">      user.valid?</code>
           </li>
         </div>
       
@@ -17952,7 +17952,7 @@
 
             
 
-            <code class="ruby">    auction_batch = Batch.create!(code: &#39;A4K1L9&#39;, start_date: 2.hours.from_now, end_date: 5.days.from_now, minimum_bid_amount: 100,</code>
+            <code class="ruby">    Batch.create!(code: &#39;A4K1L9&#39;, start_date: 2.hours.from_now, end_date: 5.days.from_now, minimum_bid_amount: 100,</code>
           </li>
         </div>
       
@@ -17963,7 +17963,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -17996,7 +17996,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id)</code>
           </li>
         </div>
       
@@ -18478,7 +18478,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de início: &#39; + I18n.l(start_date, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de início: #{I18n.l(start_date, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -18489,7 +18489,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de término: &#39; + I18n.l(end_date, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de término: #{I18n.l(end_date, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -18993,7 +18993,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -19015,7 +19015,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -19114,7 +19114,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&quot;Resultados da Busca por: A4K1L9&quot;)</code>
+            <code class="ruby">    expect(page).to have_content(&#39;Resultados da Busca por: A4K1L9&#39;)</code>
           </li>
         </div>
       
@@ -19136,7 +19136,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&quot;Lote: A4K1L9&quot;)</code>
+            <code class="ruby">    expect(page).to have_content(&#39;Lote: A4K1L9&#39;)</code>
           </li>
         </div>
       
@@ -19235,7 +19235,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -19257,7 +19257,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -19312,7 +19312,7 @@
 
             
 
-            <code class="ruby">                                        minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                 minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -19334,7 +19334,7 @@
 
             
 
-            <code class="ruby">                                         height: 50, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: second_batch.id)</code>
+            <code class="ruby">                                  height: 50, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: second_batch.id)</code>
           </li>
         </div>
       
@@ -19378,7 +19378,7 @@
 
             
 
-            <code class="ruby">                                       minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -19389,7 +19389,7 @@
 
             
 
-            <code class="ruby">    auction_item_3 = Item.create!(name: &#39;Mesa de Escritório&#39;, description: &#39;Mesa de escritório em MDF e pernas de aço&#39;, weight: 40_000, width: 100,</code>
+            <code class="ruby">    auction_item_three = Item.create!(name: &#39;Mesa de Escritório&#39;, description: &#39;Mesa de escritório em MDF e pernas de aço&#39;, weight: 40_000, width: 100,</code>
           </li>
         </div>
       
@@ -19400,7 +19400,7 @@
 
             
 
-            <code class="ruby">                                         height: 60, depth: 50, auction_item_category_id: auction_item_category.id, batch_id: third_batch.id)</code>
+            <code class="ruby">                                      height: 60, depth: 50, auction_item_category_id: auction_item_category.id, batch_id: third_batch.id)</code>
           </li>
         </div>
       
@@ -19411,7 +19411,7 @@
 
             
 
-            <code class="ruby">    auction_item_3.image.attach(io: File.open(&#39;spec/fixtures/tv-imagem.png&#39;), filename: &#39;tv-imagem.png&#39;,</code>
+            <code class="ruby">    auction_item_three.image.attach(io: File.open(&#39;spec/fixtures/tv-imagem.png&#39;), filename: &#39;tv-imagem.png&#39;,</code>
           </li>
         </div>
       
@@ -19422,7 +19422,7 @@
 
             
 
-            <code class="ruby">                                content_type: &#39;image/png&#39;)</code>
+            <code class="ruby">                                    content_type: &#39;image/png&#39;)</code>
           </li>
         </div>
       
@@ -19499,7 +19499,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&quot;Resultados da Busca por: TV&quot;)</code>
+            <code class="ruby">    expect(page).to have_content(&#39;Resultados da Busca por: TV&#39;)</code>
           </li>
         </div>
       
@@ -19521,7 +19521,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&quot;Lote: A4K1L9&quot;)</code>
+            <code class="ruby">    expect(page).to have_content(&#39;Lote: A4K1L9&#39;)</code>
           </li>
         </div>
       
@@ -19532,7 +19532,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&quot;Lote: 2GWD34&quot;)</code>
+            <code class="ruby">    expect(page).to have_content(&#39;Lote: 2GWD34&#39;)</code>
           </li>
         </div>
       
@@ -19750,7 +19750,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user: user_batch_creator)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user: user_batch_creator)</code>
           </li>
         </div>
       
@@ -19772,7 +19772,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -19926,7 +19926,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de início: &#39; + I18n.l(2.hours.from_now, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de início: #{I18n.l(2.hours.from_now, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -19937,7 +19937,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de término: &#39; + I18n.l(5.days.from_now, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de término: #{I18n.l(5.days.from_now, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -20133,7 +20133,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -20155,7 +20155,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -20342,7 +20342,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de início: &#39; + I18n.l(auction_batch.start_date, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de início: #{I18n.l(auction_batch.start_date, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -20353,7 +20353,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de término: &#39; + I18n.l(auction_batch.end_date, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de término: #{I18n.l(auction_batch.end_date, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -20474,7 +20474,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                          minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -20496,7 +20496,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: batch.id)</code>
           </li>
         </div>
       
@@ -20529,7 +20529,7 @@
 
             
 
-            <code class="ruby">    bid = Bid.create!(batch_id: batch.id, user_id: guest_user.id, value: 100)</code>
+            <code class="ruby">    Bid.create!(batch_id: batch.id, user_id: guest_user.id, value: 100)</code>
           </li>
         </div>
       
@@ -20683,7 +20683,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de início: &#39; + I18n.l(batch.start_date, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de início: #{I18n.l(batch.start_date, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -20694,7 +20694,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de término: &#39; + I18n.l(batch.end_date, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de término: #{I18n.l(batch.end_date, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -20804,7 +20804,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -20815,7 +20815,7 @@
 
             
 
-            <code class="ruby">    second_auction_batch = Batch.create!(code: &#39;623GQW&#39;, start_date: 2.hours.from_now, end_date: 12.days.from_now, minimum_bid_amount: 100,</code>
+            <code class="ruby">    Batch.create!(code: &#39;623GQW&#39;, start_date: 2.hours.from_now, end_date: 12.days.from_now, minimum_bid_amount: 100,</code>
           </li>
         </div>
       
@@ -20826,7 +20826,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -20848,7 +20848,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -20859,7 +20859,7 @@
 
             
 
-            <code class="ruby">    second_auction_item = Item.create!(name: &#39;TV Philips 32&#39;, description: &#39;Philips Smart TV 32 polegadas HDR LED 4K&#39;, weight: 10_000, width: 50,</code>
+            <code class="ruby">    Item.create!(name: &#39;TV Philips 32&#39;, description: &#39;Philips Smart TV 32 polegadas HDR LED 4K&#39;, weight: 10_000, width: 50,</code>
           </li>
         </div>
       
@@ -20870,7 +20870,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id,)</code>
+            <code class="ruby">                 height: 70, depth: 10, auction_item_category_id: auction_item_category.id)</code>
           </li>
         </div>
       
@@ -21079,7 +21079,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_select(&#39;Item&#39;, options: [&quot;TV Philips 32&quot;, &#39;TV Samsung 32&#39;])</code>
+            <code class="ruby">    expect(page).to have_select(&#39;Item&#39;, options: [&#39;TV Philips 32&#39;, &#39;TV Samsung 32&#39;])</code>
           </li>
         </div>
       
@@ -21220,7 +21220,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -21242,7 +21242,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -21396,7 +21396,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de início: &#39; + I18n.l(auction_batch.start_date, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de início: #{I18n.l(auction_batch.start_date, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -21407,7 +21407,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de término: &#39; + I18n.l(auction_batch.end_date, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de término: #{I18n.l(auction_batch.end_date, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -21506,7 +21506,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -21528,7 +21528,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -21693,7 +21693,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de início: &#39; + I18n.l(2.hours.from_now, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de início: #{I18n.l(2.hours.from_now, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -21704,7 +21704,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de término: &#39; + I18n.l(5.days.from_now, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de término: #{I18n.l(5.days.from_now, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -21792,7 +21792,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -21814,7 +21814,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -21979,7 +21979,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de início: &#39; + I18n.l(auction_batch.start_date, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de início: #{I18n.l(auction_batch.start_date, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -21990,7 +21990,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de término: &#39; + I18n.l(auction_batch.end_date, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de término: #{I18n.l(auction_batch.end_date, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -22175,7 +22175,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -22197,7 +22197,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -22340,7 +22340,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de início: &#39; + I18n.l(2.hours.from_now, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de início: #{I18n.l(2.hours.from_now, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -22351,7 +22351,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de término: &#39; + I18n.l(5.days.from_now, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de término: #{I18n.l(5.days.from_now, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -22428,7 +22428,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -22439,7 +22439,7 @@
 
             
 
-            <code class="ruby">    travel_to(2.hour.ago)</code>
+            <code class="ruby">    travel_to(2.hours.ago)</code>
           </li>
         </div>
       
@@ -22461,7 +22461,7 @@
 
             
 
-            <code class="ruby">                                                minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -22505,7 +22505,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -22527,7 +22527,7 @@
 
             
 
-            <code class="ruby">                                              height: 90, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: second_auction_batch.id)</code>
+            <code class="ruby">                                       height: 90, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: second_auction_batch.id)</code>
           </li>
         </div>
       
@@ -22714,7 +22714,7 @@
 
             
 
-            <code class="ruby">      expect(page).to have_content(&#39;Data de início: &#39; + I18n.l(2.hours.from_now, format: :short))</code>
+            <code class="ruby">      expect(page).to have_content(&quot;Data de início: #{I18n.l(2.hours.from_now, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -22725,7 +22725,7 @@
 
             
 
-            <code class="ruby">      expect(page).to have_content(&#39;Data de término: &#39; + I18n.l(5.days.from_now, format: :short))</code>
+            <code class="ruby">      expect(page).to have_content(&quot;Data de término: #{I18n.l(5.days.from_now, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -22780,7 +22780,7 @@
 
             
 
-            <code class="ruby">      expect(page).to have_content(&#39;Data de início: &#39; + I18n.l(1.hour.ago, format: :short))</code>
+            <code class="ruby">      expect(page).to have_content(&quot;Data de início: #{I18n.l(1.hour.ago, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -22791,7 +22791,7 @@
 
             
 
-            <code class="ruby">      expect(page).to have_content(&#39;Data de término: &#39; + I18n.l(5.days.from_now - 2.hours, format: :short))</code>
+            <code class="ruby">      expect(page).to have_content(&quot;Data de término: #{I18n.l(5.days.from_now - 2.hours, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -22879,7 +22879,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -22901,7 +22901,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -23044,7 +23044,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de início: &#39; + I18n.l(2.hours.from_now, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de início: #{I18n.l(2.hours.from_now, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -23055,7 +23055,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de término: &#39; + I18n.l(5.days.from_now, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de término: #{I18n.l(5.days.from_now, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -23372,7 +23372,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -23394,7 +23394,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -23570,7 +23570,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -23592,7 +23592,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -23790,7 +23790,7 @@
 
             
 
-            <code class="ruby">                                           minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                    minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -23812,7 +23812,7 @@
 
             
 
-            <code class="ruby">                                         height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                  height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -23999,7 +23999,7 @@
 
             
 
-            <code class="ruby">      expect(page).to have_content(&#39;Data de início: &#39; + I18n.l(auction_batch.start_date, format: :short))</code>
+            <code class="ruby">      expect(page).to have_content(&quot;Data de início: #{I18n.l(auction_batch.start_date, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -24010,7 +24010,7 @@
 
             
 
-            <code class="ruby">      expect(page).to have_content(&#39;Data de término: &#39; + I18n.l(auction_batch.end_date, format: :short))</code>
+            <code class="ruby">      expect(page).to have_content(&quot;Data de término: #{I18n.l(auction_batch.end_date, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -24131,7 +24131,7 @@
 
             
 
-            <code class="ruby">                                           minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                            minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -24153,7 +24153,7 @@
 
             
 
-            <code class="ruby">                                         height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: batch.id)</code>
+            <code class="ruby">                                  height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: batch.id)</code>
           </li>
         </div>
       
@@ -24186,7 +24186,7 @@
 
             
 
-            <code class="ruby">      bid = Bid.create!(batch_id: batch.id, user_id: guest_user.id, value: 100)</code>
+            <code class="ruby">      Bid.create!(batch_id: batch.id, user_id: guest_user.id, value: 100)</code>
           </li>
         </div>
       
@@ -24351,7 +24351,7 @@
 
             
 
-            <code class="ruby">      expect(page).to have_content(&#39;Data de início: &#39; + I18n.l(batch.start_date, format: :short))</code>
+            <code class="ruby">      expect(page).to have_content(&quot;Data de início: #{I18n.l(batch.start_date, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -24362,7 +24362,7 @@
 
             
 
-            <code class="ruby">      expect(page).to have_content(&#39;Data de término: &#39; + I18n.l(batch.end_date, format: :short))</code>
+            <code class="ruby">      expect(page).to have_content(&quot;Data de término: #{I18n.l(batch.end_date, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -24558,7 +24558,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                          minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -24580,7 +24580,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: batch.id)</code>
           </li>
         </div>
       
@@ -24613,7 +24613,7 @@
 
             
 
-            <code class="ruby">    bid = Bid.create!(batch_id: batch.id, user_id: guest_user.id, value: 100)</code>
+            <code class="ruby">    Bid.create!(batch_id: batch.id, user_id: guest_user.id, value: 100)</code>
           </li>
         </div>
       
@@ -24646,7 +24646,7 @@
 
             
 
-            <code class="ruby">    won_auction_batch = WonAuctionBatch.create!(batch:, user: guest_user)</code>
+            <code class="ruby">    WonAuctionBatch.create!(batch:, user: guest_user)</code>
           </li>
         </div>
       
@@ -24756,7 +24756,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de término: &#39; + I18n.l(batch.end_date, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de término: #{I18n.l(batch.end_date, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -24963,7 +24963,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -24985,7 +24985,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -25238,7 +25238,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                          minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -25260,7 +25260,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: batch.id)</code>
           </li>
         </div>
       
@@ -25557,7 +25557,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -25579,7 +25579,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -25830,7 +25830,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id)</code>
           </li>
         </div>
       
@@ -26204,7 +26204,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id)</code>
           </li>
         </div>
       
@@ -26554,7 +26554,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id)</code>
           </li>
         </div>
       
@@ -26851,7 +26851,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id)</code>
           </li>
         </div>
       
@@ -27454,7 +27454,7 @@
 
             
 
-            <code class="ruby">    auction_item = Item.create!(name: &#39;TV Samsung 32&#39;, description: &#39;Samsung Smart TV 32 polegadas HDR LED 4K&#39;, weight: 10000, width: 50,</code>
+            <code class="ruby">    auction_item = Item.create!(name: &#39;TV Samsung 32&#39;, description: &#39;Samsung Smart TV 32 polegadas HDR LED 4K&#39;, weight: 10_000, width: 50,</code>
           </li>
         </div>
       
@@ -27465,7 +27465,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id)</code>
           </li>
         </div>
       
@@ -27476,7 +27476,7 @@
 
             
 
-            <code class="ruby">    auction_item.image.attach(io: File.open(&quot;spec/fixtures/tv-imagem.png&quot;), filename: &#39;tv-imagem.png&#39;, content_type: &#39;image/png&#39;)</code>
+            <code class="ruby">    auction_item.image.attach(io: File.open(&#39;spec/fixtures/tv-imagem.png&#39;), filename: &#39;tv-imagem.png&#39;,</code>
           </li>
         </div>
       
@@ -27487,18 +27487,18 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">                              content_type: &#39;image/png&#39;)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="42">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="42">
+            
             
 
             
 
-            <code class="ruby">    login_as(user)</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -27509,7 +27509,7 @@
 
             
 
-            <code class="ruby">    visit root_path</code>
+            <code class="ruby">    login_as(user)</code>
           </li>
         </div>
       
@@ -27520,7 +27520,7 @@
 
             
 
-            <code class="ruby">    within &#39;nav&#39; do</code>
+            <code class="ruby">    visit root_path</code>
           </li>
         </div>
       
@@ -27531,18 +27531,18 @@
 
             
 
-            <code class="ruby">      click_on &#39;Itens para Leilão&#39;</code>
+            <code class="ruby">    within &#39;nav&#39; do</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="46">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="46">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">    end</code>
+            
+
+            <code class="ruby">      click_on &#39;Itens para Leilão&#39;</code>
           </li>
         </div>
       
@@ -27553,18 +27553,18 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="48">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="48">
+            
             
 
             
 
-            <code class="ruby">    expect(page).not_to have_content(&#39;Acesso não autorizado.&#39;)</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -27575,7 +27575,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;TV Samsung 32&#39;)</code>
+            <code class="ruby">    expect(page).not_to have_content(&#39;Acesso não autorizado.&#39;)</code>
           </li>
         </div>
       
@@ -27586,7 +27586,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Descrição: Samsung Smart TV 32 polegadas HDR LED 4K&#39;)</code>
+            <code class="ruby">    expect(page).to have_content(&#39;TV Samsung 32&#39;)</code>
           </li>
         </div>
       
@@ -27597,7 +27597,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Dimensões: 50cm x 70cm x 10cm&#39;)</code>
+            <code class="ruby">    expect(page).to have_content(&#39;Descrição: Samsung Smart TV 32 polegadas HDR LED 4K&#39;)</code>
           </li>
         </div>
       
@@ -27608,7 +27608,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Peso: 10000g&#39;)</code>
+            <code class="ruby">    expect(page).to have_content(&#39;Dimensões: 50cm x 70cm x 10cm&#39;)</code>
           </li>
         </div>
       
@@ -27619,7 +27619,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Categoria: Eletrônicos&#39;)</code>
+            <code class="ruby">    expect(page).to have_content(&#39;Peso: 10000g&#39;)</code>
           </li>
         </div>
       
@@ -27630,7 +27630,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&quot;Código: #{auction_item.code}&quot;)</code>
+            <code class="ruby">    expect(page).to have_content(&#39;Categoria: Eletrônicos&#39;)</code>
           </li>
         </div>
       
@@ -27641,18 +27641,18 @@
 
             
 
-            <code class="ruby">    expect(page).to have_css(&#39;img[src*=&quot;tv-imagem.png&quot;]&#39;)</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Código: #{auction_item.code}&quot;)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="56">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="56">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">  end</code>
+            
+
+            <code class="ruby">    expect(page).to have_css(&#39;img[src*=&quot;tv-imagem.png&quot;]&#39;)</code>
           </li>
         </div>
       
@@ -27663,18 +27663,18 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="58">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="58">
+            
             
 
             
 
-            <code class="ruby">  it &#39;e não existem produtos cadastrados&#39; do</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -27685,29 +27685,29 @@
 
             
 
+            <code class="ruby">  it &#39;e não existem produtos cadastrados&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="60">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">    user = User.create!(email: &#39;julia@leilaodogalpao.com.br&#39;, password: &#39;@#$GBRD&#39;, name: &#39;Julia&#39;, cpf: &#39;04206205086&#39;)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="60">
+          <li class="never" data-hits="" data-linenumber="61">
             
             
 
             
 
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="61">
-            <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">    login_as(user)</code>
           </li>
         </div>
       
@@ -27718,7 +27718,7 @@
 
             
 
-            <code class="ruby">    visit root_path</code>
+            <code class="ruby">    login_as(user)</code>
           </li>
         </div>
       
@@ -27729,7 +27729,7 @@
 
             
 
-            <code class="ruby">    within &#39;nav&#39; do</code>
+            <code class="ruby">    visit root_path</code>
           </li>
         </div>
       
@@ -27740,18 +27740,18 @@
 
             
 
-            <code class="ruby">      click_on &#39;Itens para Leilão&#39;</code>
+            <code class="ruby">    within &#39;nav&#39; do</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="65">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="65">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">    end</code>
+            
+
+            <code class="ruby">      click_on &#39;Itens para Leilão&#39;</code>
           </li>
         </div>
       
@@ -27762,12 +27762,23 @@
 
             
 
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="67">
+            
+            
+
+            
+
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="67">
+          <li class="covered" data-hits="1" data-linenumber="68">
             <span class="hits">1</span>
             
 
@@ -27778,7 +27789,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="68">
+          <li class="never" data-hits="" data-linenumber="69">
             
             
 
@@ -27789,7 +27800,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="69">
+          <li class="never" data-hits="" data-linenumber="70">
             
             
 
@@ -27925,7 +27936,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -27947,7 +27958,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -28211,7 +28222,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -28233,7 +28244,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -28550,7 +28561,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -28572,7 +28583,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -28836,7 +28847,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -28858,7 +28869,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -28902,7 +28913,7 @@
 
             
 
-            <code class="ruby">    auction_batch.auction_questions.create!(user: guest_user, question: &#39;Algum dos itens está danificado ou aberto?&#39;, status: :hidden)</code>
+            <code class="ruby">    auction_batch.auction_questions.create!(user: guest_user, question: &#39;Algum dos itens está danificado ou aberto?&#39;,</code>
           </li>
         </div>
       
@@ -28913,18 +28924,18 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">                                            status: :hidden)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="43">
-            <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="43">
+            
             
 
             
 
-            <code class="ruby">    login_as(user)</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -28935,7 +28946,7 @@
 
             
 
-            <code class="ruby">    visit root_path</code>
+            <code class="ruby">    login_as(user)</code>
           </li>
         </div>
       
@@ -28946,7 +28957,7 @@
 
             
 
-            <code class="ruby">    within &#39;nav&#39; do</code>
+            <code class="ruby">    visit root_path</code>
           </li>
         </div>
       
@@ -28957,12 +28968,23 @@
 
             
 
+            <code class="ruby">    within &#39;nav&#39; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="47">
+            <span class="hits">1</span>
+            
+
+            
+
             <code class="ruby">      click_on &#39;Lotes para Leilão&#39;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="47">
+          <li class="never" data-hits="" data-linenumber="48">
             
             
 
@@ -28973,7 +28995,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="48">
+          <li class="covered" data-hits="1" data-linenumber="49">
             <span class="hits">1</span>
             
 
@@ -28984,7 +29006,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="49">
+          <li class="covered" data-hits="1" data-linenumber="50">
             <span class="hits">1</span>
             
 
@@ -28995,7 +29017,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="50">
+          <li class="never" data-hits="" data-linenumber="51">
             
             
 
@@ -29006,7 +29028,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="51">
+          <li class="covered" data-hits="1" data-linenumber="52">
             <span class="hits">1</span>
             
 
@@ -29017,7 +29039,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="52">
+          <li class="covered" data-hits="1" data-linenumber="53">
             <span class="hits">1</span>
             
 
@@ -29028,7 +29050,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="53">
+          <li class="covered" data-hits="1" data-linenumber="54">
             <span class="hits">1</span>
             
 
@@ -29039,7 +29061,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="54">
+          <li class="never" data-hits="" data-linenumber="55">
             
             
 
@@ -29050,7 +29072,7 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="55">
+          <li class="never" data-hits="" data-linenumber="56">
             
             
 
@@ -29186,7 +29208,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -29208,7 +29230,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -29483,7 +29505,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -29505,7 +29527,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -29571,7 +29593,7 @@
 
             
 
-            <code class="ruby">    reply = AuctionQuestionReply.create!(user:, auction_question: auction_batch.auction_questions.first,</code>
+            <code class="ruby">    AuctionQuestionReply.create!(user:, auction_question: auction_batch.auction_questions.first,</code>
           </li>
         </div>
       
@@ -29582,7 +29604,7 @@
 
             
 
-            <code class="ruby">                                         reply: &#39;Não, todos lacrados e intactos. Em caso de danos ou lacre violado, o comprador poderá devolver o item e receber o dinheiro de volta.&#39;)</code>
+            <code class="ruby">                                 reply: &#39;Não, todos lacrados e intactos. Em caso de danos ou lacre violado, o comprador poderá devolver o item e receber o dinheiro de volta.&#39;)</code>
           </li>
         </div>
       
@@ -29791,7 +29813,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -29813,7 +29835,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -29879,7 +29901,7 @@
 
             
 
-            <code class="ruby">    reply = AuctionQuestionReply.create!(user:, auction_question: auction_batch.auction_questions.first,</code>
+            <code class="ruby">    AuctionQuestionReply.create!(user:, auction_question: auction_batch.auction_questions.first,</code>
           </li>
         </div>
       
@@ -29890,7 +29912,7 @@
 
             
 
-            <code class="ruby">                                         reply: &#39;Não, todos lacrados e intactos. Em caso de danos ou lacre violado, o comprador poderá devolver o item e receber o dinheiro de volta.&#39;)</code>
+            <code class="ruby">                                 reply: &#39;Não, todos lacrados e intactos. Em caso de danos ou lacre violado, o comprador poderá devolver o item e receber o dinheiro de volta.&#39;)</code>
           </li>
         </div>
       
@@ -30077,7 +30099,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -30099,7 +30121,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -30154,7 +30176,7 @@
 
             
 
-            <code class="ruby">    reply = AuctionQuestionReply.create!(user:, auction_question: auction_batch.auction_questions.first,</code>
+            <code class="ruby">    AuctionQuestionReply.create!(user:, auction_question: auction_batch.auction_questions.first,</code>
           </li>
         </div>
       
@@ -30165,7 +30187,7 @@
 
             
 
-            <code class="ruby">                                         reply: &#39;Não, todos lacrados e intactos. Em caso de danos ou lacre violado, o comprador poderá devolver o item e receber o dinheiro de volta.&#39;)</code>
+            <code class="ruby">                                 reply: &#39;Não, todos lacrados e intactos. Em caso de danos ou lacre violado, o comprador poderá devolver o item e receber o dinheiro de volta.&#39;)</code>
           </li>
         </div>
       
@@ -32476,7 +32498,7 @@
 
             
 
-            <code class="ruby">    fill_in &#39;Cpf&#39;, with: &#39;00742158098&#39;</code>
+            <code class="ruby">    fill_in &#39;CPF&#39;, with: &#39;00742158098&#39;</code>
           </li>
         </div>
       
@@ -33068,7 +33090,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_field(&#39;Cpf&#39;)</code>
+            <code class="ruby">    expect(page).to have_field(&#39;CPF&#39;)</code>
           </li>
         </div>
       
@@ -33264,7 +33286,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -33286,7 +33308,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -33528,7 +33550,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -33550,7 +33572,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -33836,7 +33858,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                                  minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -33858,7 +33880,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -33902,7 +33924,7 @@
 
             
 
-            <code class="ruby">    fav_batch = UserFavBatch.create!(user_id: guest_user.id, batch_id: auction_batch.id)</code>
+            <code class="ruby">    UserFavBatch.create!(user_id: guest_user.id, batch_id: auction_batch.id)</code>
           </li>
         </div>
       
@@ -34175,7 +34197,7 @@
 
             
 
-            <code class="ruby">                                         minimum_bid_difference: 10, created_by_user_id: user.id)</code>
+            <code class="ruby">                          minimum_bid_difference: 10, created_by_user_id: user.id)</code>
           </li>
         </div>
       
@@ -34197,7 +34219,7 @@
 
             
 
-            <code class="ruby">                                       height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: batch.id)</code>
+            <code class="ruby">                                height: 70, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: batch.id)</code>
           </li>
         </div>
       
@@ -34241,7 +34263,7 @@
 
             
 
-            <code class="ruby">    user_fav_batch = UserFavBatch.create!(user: guest_user, batch:)</code>
+            <code class="ruby">    UserFavBatch.create!(user: guest_user, batch:)</code>
           </li>
         </div>
       
@@ -34351,7 +34373,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de início: &#39; + I18n.l(2.hours.from_now, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de início: #{I18n.l(2.hours.from_now, format: :short)}&quot;)</code>
           </li>
         </div>
       
@@ -34362,7 +34384,7 @@
 
             
 
-            <code class="ruby">    expect(page).to have_content(&#39;Data de término: &#39; + I18n.l(5.days.from_now, format: :short))</code>
+            <code class="ruby">    expect(page).to have_content(&quot;Data de término: #{I18n.l(5.days.from_now, format: :short)}&quot;)</code>
           </li>
         </div>
       

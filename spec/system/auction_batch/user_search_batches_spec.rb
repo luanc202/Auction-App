@@ -50,10 +50,10 @@ describe 'Usuário busca por um lote' do
                                 content_type: 'image/png')
     third_batch = Batch.create!(code: 'J3EQ97', start_date: 6.hours.from_now, end_date: 15.days.from_now, minimum_bid_amount: 700,
                                 minimum_bid_difference: 10, created_by_user_id: user.id)
-    auction_item_3 = Item.create!(name: 'Mesa de Escritório', description: 'Mesa de escritório em MDF e pernas de aço', weight: 40_000, width: 100,
-                                  height: 60, depth: 50, auction_item_category_id: auction_item_category.id, batch_id: third_batch.id)
-    auction_item_3.image.attach(io: File.open('spec/fixtures/tv-imagem.png'), filename: 'tv-imagem.png',
-                                content_type: 'image/png')
+    auction_item_three = Item.create!(name: 'Mesa de Escritório', description: 'Mesa de escritório em MDF e pernas de aço', weight: 40_000, width: 100,
+                                      height: 60, depth: 50, auction_item_category_id: auction_item_category.id, batch_id: third_batch.id)
+    auction_item_three.image.attach(io: File.open('spec/fixtures/tv-imagem.png'), filename: 'tv-imagem.png',
+                                    content_type: 'image/png')
     travel_back
 
     visit root_path

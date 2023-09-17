@@ -18,7 +18,7 @@ describe 'Administrador acessa página de CPFs bloqueados' do
     click_on 'CPFs Bloqueados'
 
     expect(page).to have_content('CPFs bloqueados')
-    expect(page).to have_field('Cpf')
+    expect(page).to have_field('CPF')
     expect(page).to have_content('Bloquear novo CPF')
     expect(page).to have_content('49914857035')
     expect(page).to have_content('00742158098')

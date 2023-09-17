@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    models:
+      blocked_cpf: 'CPF Bloqueado'
+    attributes:
+      blocked_cpf:
+        cpf: 'CPF'
+  blocked_cpf:
+    blocked:
+      message: 'Sua conta está suspensa.'
+ 

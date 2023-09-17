@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   def reject_blocked_cpf
     return unless user_signed_in? && BlockedCpf.find_by(cpf: current_user.cpf)
 
-    flash.now[:alert] = 'Sua conta está suspensa.'
+    flash.now[:alert] = t('blocked_cpf.blocked.message')
   end
 
   def home_page?
