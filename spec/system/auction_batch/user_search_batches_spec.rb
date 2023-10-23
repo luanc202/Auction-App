@@ -44,10 +44,10 @@ describe 'Usuário busca por um lote' do
     auction_batch.approved!
     second_batch = Batch.create!(code: '2GWD34', start_date: 4.hours.from_now, end_date: 12.days.from_now, minimum_bid_amount: 505,
                                  minimum_bid_difference: 10, created_by_user_id: user.id)
-    auction_item_2 = Item.create!(name: 'TV Philips 32', description: 'Philips Smart TV 32 polegadas LCD 2K', weight: 8_000, width: 40,
-                                  height: 50, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: second_batch.id)
-    auction_item_2.image.attach(io: File.open('spec/fixtures/tv-imagem.png'), filename: 'tv-imagem.png',
-                                content_type: 'image/png')
+    auction_item_two = Item.create!(name: 'TV Philips 32', description: 'Philips Smart TV 32 polegadas LCD 2K', weight: 8_000, width: 40,
+                                    height: 50, depth: 10, auction_item_category_id: auction_item_category.id, batch_id: second_batch.id)
+    auction_item_two.image.attach(io: File.open('spec/fixtures/tv-imagem.png'), filename: 'tv-imagem.png',
+                                  content_type: 'image/png')
     third_batch = Batch.create!(code: 'J3EQ97', start_date: 6.hours.from_now, end_date: 15.days.from_now, minimum_bid_amount: 700,
                                 minimum_bid_difference: 10, created_by_user_id: user.id)
     auction_item_three = Item.create!(name: 'Mesa de Escritório', description: 'Mesa de escritório em MDF e pernas de aço', weight: 40_000, width: 100,
