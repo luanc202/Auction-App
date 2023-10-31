@@ -3,11 +3,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :created_auction_batches, class_name: 'Batch', foreign_key: 'created_by_user_id'
   has_many :approved_auction_batches, class_name: 'Batch', foreign_key: 'approved_by_user_id'
-  has_many :bids
-  has_many :won_auction_batch
-  has_many :user_fav_batch
-  has_many :auction_questions
-  has_many :auction_questions_reply
+  has_many :bids, dependent: :nullify
+  has_many :won_auction_batch, dependent: :nullify
+  has_many :user_fav_batch, dependent: :nullify
+  has_many :auction_questions, dependent: :nullify
+  has_many :auction_questions_reply, dependent: :nullify
 
   enum role: { user: 0, admin: 1 }
 
