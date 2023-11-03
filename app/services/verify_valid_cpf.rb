@@ -4,27 +4,34 @@ class VerifyValidCpf
   end
 
   def check_cpf
-    if cpf.length != 11
-      errors.add(:cpf, 'deve ter 11 dígitos')
-      return
-    end
+    return 'deve ter 11 dígitos' unless valid_cpf_length?
+    return 'cpf com todos dígitos iguais é inválido' unless unique_digits?
+    return 'deve ser válido' unless valid_digits?
 
-    if cpf.chars.uniq.size == 1
-      errors.add(:cpf, 'cpf com todos dígitos iguais é inválido')
-      return
-    end
-
-    sum = 0
-    9.times { |i| sum += cpf[i].to_i * (10 - i) }
-    digit1 = (sum * 10 % 11) % 10
-
-    sum = 0
-    10.times { |i| sum += cpf[i].to_i * (11 - i) }
-    digit2 = (sum * 10 % 11) % 10
-
-    return if cpf[-2..] == "#{digit1}#{digit2}"
-
-    errors.add(:cpf, 'deve ser válido')
     nil
+  end
+
+  private
+
+  def valid_cpf_length?
+    @cpf.length == 11
+  end
+
+  def unique_digits?
+    @cpf.chars.uniq.size != 1
+  end
+
+  def valid_digits?
+    digit1 = calculate_digit(9)
+    digit2 = calculate_digit(10)
+
+    @cpf[-2..] == "#{digit1}#{digit2}"
+  end
+
+  def calculate_digit(position)
+    n = position == 9 ? 10 : 11
+    sum = 0
+    position.times { |i| sum += @cpf[i].to_i * (n - i) }
+    (sum * 10 % 11) % 10
   end
 end
