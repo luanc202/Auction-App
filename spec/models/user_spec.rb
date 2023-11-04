@@ -57,7 +57,6 @@ RSpec.describe User, type: :model do
 
       user.valid?
 
-      puts user.errors.full_messages
       expect(user.errors.include?(:cpf)).to eq true
       expect(user.errors[:cpf]).to include('cpf com todos dígitos iguais é inválido')
     end
