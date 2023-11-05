@@ -48,6 +48,7 @@ describe 'User vê lote para leilão' do
       click_on 'Favoritos'
     end
     click_on 'Remover'
+    click_on 'Favoritos'
 
     expect(page).to have_content('Nenhum Lote adicionado aos favoritos.')
     expect(current_path).to eq(user_fav_batches_path)

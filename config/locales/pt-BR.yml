@@ -3,3 +3,6 @@ pt-BR:
   found:
     one: 'encontrado'
     other: 'encontrados'
+  user_fav_batches:
+    destroy:
+      success: 'Lote removido dos favoritos'
