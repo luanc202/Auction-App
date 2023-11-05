@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      user_fav_batch:
+        one: 'Favorito'
+        other: 'Favoritos'
+  user_fav_batch:
+    create:
+      error: 'Não foi possível adicionar o lote aos favoritos'
+      success: 'Lote adicionado aos favoritos'
+    destroy:
+      error: 'Não foi possível remover o lote dos favoritos'
+      success: 'Lote removido dos favoritos'
