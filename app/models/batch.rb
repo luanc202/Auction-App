@@ -1,9 +1,9 @@
 class Batch < ApplicationRecord
   belongs_to :created_by_user, class_name: 'User'
   belongs_to :approved_by_user, class_name: 'User', optional: true
-  has_many :items, dependent: :restrict_with_error
-  has_many :bids
-  has_one :won_auction_batch
+  has_many :items, dependent: :nullify
+  has_many :bids, dependent: :nullify
+  has_one :won_auction_batch, dependent: :nullify
   has_many :auction_questions, dependent: :restrict_with_error
 
   enum status: { pending: 0, approved: 1, finished: 2, cancelled: 3 }
