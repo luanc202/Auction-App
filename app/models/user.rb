@@ -1,8 +1,10 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  has_many :created_auction_batches, class_name: 'Batch', foreign_key: 'created_by_user_id'
-  has_many :approved_auction_batches, class_name: 'Batch', foreign_key: 'approved_by_user_id'
+  has_many :created_auction_batches, class_name: 'Batch', foreign_key: 'created_by_user_id', dependent: :nullify,
+                                     inverse_of: :created_by_user
+  has_many :approved_auction_batches, class_name: 'Batch', foreign_key: 'approved_by_user_id', dependent: :nullify,
+                                      inverse_of: :approved_by_user
   has_many :bids, dependent: :nullify
   has_many :won_auction_batch, dependent: :nullify
   has_many :user_fav_batch, dependent: :nullify
