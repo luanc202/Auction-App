@@ -4,7 +4,7 @@ pt-BR:
       user_fav_batch:
         one: 'Favorito'
         other: 'Favoritos'
-  user_fav_batch:
+  user_fav_batches:
     create:
       error: 'Não foi possível adicionar o lote aos favoritos'
       success: 'Lote adicionado aos favoritos'
