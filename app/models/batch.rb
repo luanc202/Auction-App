@@ -28,8 +28,8 @@ class Batch < ApplicationRecord
   end
 
   def validate_code
-    unless code =~ /\A(?=[a-zA-Z]*\d[a-zA-Z]*\d[a-zA-Z]*\d[a-zA-Z]*)[a-zA-Z\d]{6}\z/
-      errors.add(:code, 'Deve conter 3 números e 3 letras')
-    end
+    return if code =~ /\A(?=[a-zA-Z]*\d[a-zA-Z]*\d[a-zA-Z]*\d[a-zA-Z]*)[a-zA-Z\d]{6}\z/
+
+    errors.add(:code, 'Deve conter 3 números e 3 letras')
   end
 end
