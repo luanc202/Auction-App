@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_05_002147) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_05_002634) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -110,6 +110,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_05_002147) do
     t.integer "batch_id"
     t.index ["auction_item_category_id"], name: "index_items_on_auction_item_category_id"
     t.index ["batch_id"], name: "index_items_on_batch_id"
+    t.index ["code"], name: "index_items_on_code", unique: true
   end
 
   create_table "user_fav_batches", force: :cascade do |t|
