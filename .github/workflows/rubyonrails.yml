@@ -45,7 +45,6 @@ jobs:
         
       - name: Set up asset pipeline
         run: |
-          yarn build
           yarn build:css
           
       # Add or replace test runners here
