@@ -1,7 +1,7 @@
 class BatchesController < ApplicationController
   before_action :authenticate_user!, except: %i[index show search]
   before_action :allow_if_admin, except: %i[index show won search]
-  before_action :set_auction_batch, only: %i[show edit update approved add_item add_item_save]
+  before_action :set_auction_batch, only: %i[show approved add_item add_item_save]
 
   def index
     @auction_batches = if current_user&.admin?
@@ -32,7 +32,7 @@ class BatchesController < ApplicationController
     if @auction_batch.save
       redirect_to @auction_batch
     else
-      flash.now[:notice] = 'Não foi possível cadastrar o Lote para Leilão.'
+      flash.now[:notice] = t('.error')
       render :new
     end
   end
@@ -53,7 +53,7 @@ class BatchesController < ApplicationController
     if @auction_item.save
       redirect_to @auction_batch
     else
-      flash.now[:notice] = 'Não foi possível adicionar o Item ao Lote.'
+      flash.now[:notice] = t('.error')
       render :add_item
     end
   end
@@ -67,9 +67,9 @@ class BatchesController < ApplicationController
     @auction_batch.finished!
     won_auction_batch = WonAuctionBatch.new(batch: @auction_batch, user: @auction_batch.bids.last.user)
     if won_auction_batch.save
-      redirect_to expired_batches_path, notice: 'Lote finalizado com sucesso.'
+      redirect_to expired_batches_path, notice: t('.success')
     else
-      redirect_to expired_batches_path, notice: 'Não foi possível finalizar o Lote.'
+      redirect_to expired_batches_path, notice: t('.error')
     end
   end
 
@@ -80,7 +80,7 @@ class BatchesController < ApplicationController
       auction_item.batch = nil
       auction_item.save
     end
-    redirect_to expired_batches_path, notice: 'Lote cancelado com sucesso.'
+    redirect_to expired_batches_path, notice: t('.success')
   end
 
   def won
@@ -98,7 +98,7 @@ class BatchesController < ApplicationController
   private
 
   def allow_if_admin
-    redirect_to root_path, notice: 'Acesso não autorizado.' unless current_user.admin?
+    redirect_to root_path, notice: t('access_denied') unless current_user.admin?
   end
 
   def set_auction_batch

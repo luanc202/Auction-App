@@ -15,7 +15,7 @@ describe 'Administrador acessa página de CPFs bloqueados' do
       click_on 'Entrar'
     end
     click_on 'CPFs Bloqueados'
-    fill_in 'Cpf', with: '00742158098'
+    fill_in 'CPF', with: '00742158098'
     click_on 'Bloquear CPF'
 
     expect(page).to have_content('CPFs bloqueados')

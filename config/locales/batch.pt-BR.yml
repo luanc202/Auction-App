@@ -17,3 +17,13 @@ pt-BR:
         minimum_bid_difference: 'Menor diferença entre lances'
         status: 'Status'
         created_by_user: 'Criado por'
+  batches:
+    cacelled:
+      success: 'Lote cancelado com sucesso.'
+    finished:
+      success: 'Lote finalizado com sucesso.'
+      error: 'Não foi possível finalizar o lote.'
+    add_item_save:
+      error: 'Não foi possível adicionar o item ao lote.'
+    create:
+      error: 'Não foi possível cadastrar o Lote para Leilão.'

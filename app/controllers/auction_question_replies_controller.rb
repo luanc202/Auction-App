@@ -6,20 +6,22 @@ class AuctionQuestionRepliesController < ApplicationController
   end
 
   def create
-    reply_params = params.permit(:reply, :auction_question_id)
-    reply = AuctionQuestionReply.new(reply: reply_params[:reply], auction_question_id: reply_params[:auction_question_id],
-                                     user: current_user)
+    reply = AuctionQuestionReply.new(question_replies_params(current_user))
     if reply.save
       redirect_to batch_path(reply.auction_question.batch)
     else
-      flash[:notice] = 'Não foi possível enviar a Pergunta.'
+      flash[:notice] = t('.create.error')
       redirect_to auction_question_replies_path
     end
   end
 
   private
 
+  def question_replies_params(user)
+    params.permit(:reply, :auction_question_id, :user_id).merge(user:)
+  end
+
   def check_if_admin
-    redirect_to root_path, notice: 'Acesso não autorizado.' unless current_user.admin?
+    redirect_to root_path, notice: t('access_denied') unless current_user.admin?
   end
 end

@@ -1,13 +1,15 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  has_many :created_auction_batches, class_name: 'Batch', foreign_key: 'created_by_user_id'
-  has_many :approved_auction_batches, class_name: 'Batch', foreign_key: 'approved_by_user_id'
-  has_many :bids
-  has_many :won_auction_batch
-  has_many :user_fav_batch
-  has_many :auction_questions
-  has_many :auction_questions_reply
+  has_many :created_auction_batches, class_name: 'Batch', foreign_key: 'created_by_user_id', dependent: :nullify,
+                                     inverse_of: :created_by_user
+  has_many :approved_auction_batches, class_name: 'Batch', foreign_key: 'approved_by_user_id', dependent: :nullify,
+                                      inverse_of: :approved_by_user
+  has_many :bids, dependent: :nullify
+  has_many :won_auction_batch, dependent: :nullify
+  has_many :user_fav_batch, dependent: :nullify
+  has_many :auction_questions, dependent: :nullify
+  has_many :auction_questions_reply, dependent: :nullify
 
   enum role: { user: 0, admin: 1 }
 
@@ -16,7 +18,7 @@ class User < ApplicationRecord
 
   validates :name, :email, :password, :cpf, presence: true
   validates :cpf, uniqueness: true
-  validate :check_cpf
+  validate :cpf_must_be_valid
   validate :cpf_blocked
 
   before_validation :make_admin_if_email, on: :create
@@ -31,29 +33,10 @@ class User < ApplicationRecord
     self.role = :admin if email.split('@').last == 'leilaodogalpao.com.br'
   end
 
-  def check_cpf
-    if cpf.length != 11
-      errors.add(:cpf, 'deve ter 11 dígitos')
-      return
-    end
-
-    if cpf.chars.uniq.size == 1
-      errors.add(:cpf, 'cpf com todos dígitos iguais é inválido')
-      return
-    end
-
-    sum = 0
-    9.times { |i| sum += cpf[i].to_i * (10 - i) }
-    digit1 = (sum * 10 % 11) % 10
-
-    sum = 0
-    10.times { |i| sum += cpf[i].to_i * (11 - i) }
-    digit2 = (sum * 10 % 11) % 10
-
-    return if cpf[-2..] == "#{digit1}#{digit2}"
-
-    errors.add(:cpf, 'deve ser válido')
-    nil
+  def cpf_must_be_valid
+    verify_valid_cpf = VerifyValidCpf.new(cpf)
+    error_message = verify_valid_cpf.check_cpf
+    errors.add(:cpf, error_message) unless error_message.nil?
   end
 
   def cpf_blocked

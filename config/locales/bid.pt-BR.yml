@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      bid:
+        one: 'Lance'
+        other: 'Lances'
+  bids:
+    create:
+      error: 'Não foi possível realizar o lance.'
+      success: 'Lance dado com sucesso!'

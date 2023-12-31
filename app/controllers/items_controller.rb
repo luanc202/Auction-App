@@ -21,7 +21,7 @@ class ItemsController < ApplicationController
     if @auction_item.save
       redirect_to @auction_item
     else
-      flash.now[:notice] = 'Não foi possível cadastrar o Item de Leilão.'
+      flash.now[:notice] = t('.error')
       @auction_item_categories = AuctionItemCategory.all
       render :new
     end
@@ -30,6 +30,6 @@ class ItemsController < ApplicationController
   private
 
   def check_if_admin
-    redirect_to root_path, notice: 'Acesso não autorizado.' unless current_user.admin?
+    redirect_to root_path, notice: t('access_denied') unless current_user.admin?
   end
 end

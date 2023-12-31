@@ -6,30 +6,37 @@ class UserFavBatchesController < ApplicationController
   end
 
   def create
-    user_fav_batch_params = params.permit(:batch_id)
     user_fav_batch = UserFavBatch.new(user_fav_batch_params)
     user_fav_batch.user_id = current_user.id
     if user_fav_batch.save
-      flash[:notice] = 'Lote adicionado aos favoritos'
-      redirect_to batch_path(user_fav_batch.batch)
+      handle_success(user_fav_batch)
     else
-      flash[:now] = 'Não foi possível adicionar o lote aos favoritos'
-      redirect_to batch_path(user_fav_batch_params[:batch_id])
+      handle_error('error')
     end
   end
 
   def destroy
     user_fav_batch = current_user.user_fav_batch.where(batch_id: params[:id]).first
     if user_fav_batch.destroy
-      flash[:notice] = 'Lote removido dos favoritos'
-      if params[:at_fav_page] == 'true'
-        redirect_to user_fav_batches_path
-      else
-        redirect_to batch_path(user_fav_batch.batch)
-      end
+      handle_success(user_fav_batch)
     else
-      flash[:alert] = 'Não foi possível remover o lote dos favoritos'
-      redirect_to batch_path(user_fav_batch.batch)
+      handle_error('error')
     end
+  end
+
+  private
+
+  def user_fav_batch_params
+    params.permit(:batch_id)
+  end
+
+  def handle_success(user_fav_batch)
+    flash[:notice] = t('.success')
+    redirect_to batch_path(user_fav_batch.batch)
+  end
+
+  def handle_error(message)
+    flash[:alert] = t(message)
+    redirect_to batch_path(user_fav_batch_params[:batch_id])
   end
 end

@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      item:
+        one: 'Item'
+        other: 'Itens'
+  items:
+    create:
+      error: 'Não foi possível cadastrar o Item de Leilão.'
+      success: 'Item cadastrado com sucesso'
+    destroy:
+      error: 'Não foi possível remover item de leilão'
+      success: 'Item removido'

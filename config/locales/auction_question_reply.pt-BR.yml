@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      auction_question_reply:
+        one: 'Resposta'
+        other: 'Respostas'
+  auction_question_replies:
+    create:
+      success:
+      error: 'Não foi possível enviar a Resposta.'
