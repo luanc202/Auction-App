@@ -2,21 +2,19 @@ version: "3.9"
 
 services:
 
-  app:
+  auctionapp:
     build:
       context: .
     volumes:
       - .:/opt/app
     ports:
       - '8010:8010'
-    env_file:
-      - .env
 
   nginx:
     build:
       context: .
       dockerfile: ./Dockerfile.nginx
     links:
-      - app
+      - auctionapp
     ports:
       - '8020:8020'
